@@ -73,7 +73,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white font-roboto">
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-rogue-dark via-rogue-charcoal to-rogue-maroon overflow-hidden">
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-rogue-dark/90 via-rogue-charcoal/80 to-rogue-maroon/90"></div>
+        
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-32 h-32 border border-white rounded-full"></div>
