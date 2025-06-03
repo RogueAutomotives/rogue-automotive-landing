@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -112,13 +111,13 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button size="lg" className="bg-rogue-maroon hover:bg-rogue-maroon/90 text-white px-8 py-6 text-lg font-montserrat font-semibold">
+              <Button size="lg" className="bg-rogue-maroon hover:bg-rogue-maroon/90 text-white border-0 px-8 py-6 text-lg font-montserrat font-semibold">
                 Book a Car Wash
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-rogue-dark px-8 py-6 text-lg font-montserrat font-semibold">
+              <Button size="lg" className="bg-white hover:bg-gray-100 text-rogue-dark border-0 px-8 py-6 text-lg font-montserrat font-semibold">
                 Browse Cars for Sale
               </Button>
-              <Button size="lg" variant="outline" className="border-rogue-silver text-rogue-silver hover:bg-rogue-silver hover:text-rogue-dark px-8 py-6 text-lg font-montserrat font-semibold">
+              <Button size="lg" className="bg-rogue-silver hover:bg-rogue-silver/90 text-rogue-dark border-0 px-8 py-6 text-lg font-montserrat font-semibold">
                 Rent a Vehicle
               </Button>
             </div>
