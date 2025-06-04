@@ -28,10 +28,10 @@ const Footer = () => {
           <div className="animate-fade-in animation-delay-400">
             <h4 className="font-montserrat font-bold text-lg mb-4">Company</h4>
             <ul className="space-y-2 text-rogue-silver">
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Contact</a></li>
+              <li><a href="#about" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">About Us</a></li>
+              <li><a href="#contact" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Contact</a></li>
               {/* <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Careers</a></li> */}
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Reviews</a></li>
+              <li><a href="#testimonials" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Reviews</a></li>
             </ul>
           </div>
           
