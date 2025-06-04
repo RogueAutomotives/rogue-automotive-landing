@@ -21,7 +21,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Car Wash</a></li>
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Car Sales</a></li>
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Car Rentals</a></li>
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Detailing</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Detailing</a></li> */}
             </ul>
           </div>
           
@@ -30,7 +30,7 @@ const Footer = () => {
             <ul className="space-y-2 text-rogue-silver">
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">About Us</a></li>
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Careers</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Careers</a></li> */}
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Reviews</a></li>
             </ul>
           </div>
@@ -38,16 +38,17 @@ const Footer = () => {
           <div className="animate-fade-in animation-delay-600">
             <h4 className="font-montserrat font-bold text-lg mb-4">Connect</h4>
             <ul className="space-y-2 text-rogue-silver">
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Facebook</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Facebook</a></li> */}
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Instagram</a></li>
               <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">Twitter</a></li>
-              <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">LinkedIn</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-all duration-300 hover:translate-x-2 inline-block">LinkedIn</a></li> */}
             </ul>
           </div>
         </div>
         
         <div className="border-t border-rogue-charcoal mt-8 pt-8 text-center text-rogue-silver animate-fade-in animation-delay-800">
-          <p>&copy; 2024 Rogue Automotive. All rights reserved. | Privacy Policy | Terms of Service</p>
+          {/* <p>&copy; 2024 Rogue Automotive Ja. All rights reserved. | Privacy Policy | Terms of Service</p> */}
+          <p>&copy; 2024 Rogue Automotive Ja. All rights reserved.</p>
         </div>
       </div>
     </footer>

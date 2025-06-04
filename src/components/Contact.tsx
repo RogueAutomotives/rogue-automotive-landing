@@ -92,15 +92,14 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Map and Info */}
             <div className="space-y-8 animate-fade-in animation-delay-700">
               <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-montserrat font-bold text-rogue-dark mb-4">Visit Us</h3>
                   <div className="space-y-3 text-rogue-charcoal">
-                    <p><strong>Address:</strong> 123 Auto Drive, Car City, CC 12345</p>
-                    <p><strong>Phone:</strong> (555) 123-ROGUE</p>
-                    <p><strong>Email:</strong> info@rogueautomotive.com</p>
+                    <p><strong>Address:</strong> 14 Westminster Rd, Kingston 10, Jamaica</p>
+                    <p><strong>Phone:</strong> (876) 860-5061</p>
+                    <p><strong>Email:</strong> info@rogueautomotiveja.com</p>
                   </div>
                 </CardContent>
               </Card>
@@ -115,15 +114,6 @@ const Contact = () => {
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Map Placeholder */}
-              <div className="bg-rogue-light rounded-lg h-64 flex items-center justify-center transition-all duration-300 hover:bg-rogue-silver/20 hover:scale-105 cursor-pointer">
-                <div className="text-center text-rogue-charcoal">
-                  <MapPin className="h-12 w-12 mx-auto mb-2 transition-transform duration-300 hover:scale-125" />
-                  <p>Interactive Map</p>
-                  <p className="text-sm">Google Maps integration would go here</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -9,17 +9,12 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-8 animate-fade-in">
             About Rogue Automotive
           </h2>
-          <p className="text-lg md:text-xl text-rogue-charcoal leading-relaxed mb-8 animate-fade-in animation-delay-300">
+          <p className="text-lg md:text-xl text-rogue-charcoal leading-relaxed animate-fade-in animation-delay-300">
             At Rogue Automotive, we're passionate about cars and dedicated to providing exceptional service. 
             Whether you need a premium car wash, are looking for your next vehicle, or require a reliable rental, 
             we're here to exceed your expectations. Our commitment to quality and customer satisfaction drives 
             everything we do.
           </p>
-          <div className="flex justify-center animate-fade-in animation-delay-500">
-            <Badge variant="outline" className="text-rogue-maroon border-rogue-maroon px-6 py-2 text-lg transition-all duration-300 hover:bg-rogue-maroon hover:text-white hover:scale-105">
-              Your Automotive Partner Since 2020
-            </Badge>
-          </div>
         </div>
       </div>
     </section>
