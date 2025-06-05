@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -23,12 +22,12 @@ const Hero = () => {
       </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 container mx-auto px-6 py-6">
+      <nav className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6">
         <div className="flex items-center justify-between">
           <img 
             src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" 
             alt="Rogue Automotive Logo" 
-            className="h-16 w-auto animate-fade-in transition-transform duration-300 hover:scale-110"
+            className="h-12 sm:h-16 w-auto animate-fade-in transition-transform duration-300 hover:scale-110"
           />
           <div className="hidden md:flex space-x-8">
             <a href="#services" className="text-white hover:text-rogue-silver transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-silver after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Services</a>
@@ -39,26 +38,26 @@ const Hero = () => {
       </nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 container mx-auto px-6 flex items-center min-h-[80vh]">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 flex items-center min-h-[80vh]">
         <div className="max-w-3xl animate-slide-in-left">
-          <h1 className="text-5xl md:text-7xl font-montserrat font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-bold text-white mb-4 sm:mb-6 leading-tight">
             Drive Clean.<br />
             Drive Bold.<br />
             <span className="text-rogue-silver">Drive Rogue.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-rogue-silver mb-8 max-w-2xl animate-fade-in animation-delay-500">
+          <p className="text-lg sm:text-xl md:text-2xl text-rogue-silver mb-6 sm:mb-8 max-w-2xl animate-fade-in animation-delay-500">
             Car Wash | Car Sales | Car Rentals – All in One Place.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-in animation-delay-1000">
-            <Button size="lg" className="bg-rogue-maroon hover:bg-rogue-maroon/90 text-white border-0 px-8 py-6 text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/50">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in animation-delay-1000">
+            <Button size="lg" className="bg-rogue-maroon hover:bg-rogue-maroon/90 text-white border-0 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/50">
               Book a Car Wash
             </Button>
-            <Button size="lg" className="bg-white hover:bg-gray-100 text-rogue-dark border-0 px-8 py-6 text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <Button size="lg" className="bg-white hover:bg-gray-100 text-rogue-dark border-0 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
               Browse Cars for Sale
             </Button>
-            <Button size="lg" className="bg-rogue-silver hover:bg-rogue-silver/90 text-rogue-dark border-0 px-8 py-6 text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <Button size="lg" className="bg-rogue-silver hover:bg-rogue-silver/90 text-rogue-dark border-0 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
               Rent a Vehicle
             </Button>
           </div>
