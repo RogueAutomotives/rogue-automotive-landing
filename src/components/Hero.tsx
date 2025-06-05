@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useScroll } from "@/hooks/use-scroll";
 
 const Hero = () => {
+  const isScrolled = useScroll();
+
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background Image */}
@@ -22,17 +25,63 @@ const Hero = () => {
       </div>
       
       {/* Navigation */}
-      <nav className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        <div className="flex items-center justify-between">
-          <img 
-            src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" 
-            alt="Rogue Automotive Logo" 
-            className="h-12 sm:h-16 w-auto animate-fade-in transition-transform duration-300 hover:scale-110"
-          />
-          <div className="hidden md:flex space-x-8">
-            <a href="#services" className="text-white hover:text-rogue-silver transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-silver after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Services</a>
-            <a href="#about" className="text-white hover:text-rogue-silver transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-silver after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">About</a>
-            <a href="#contact" className="text-white hover:text-rogue-silver transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-silver after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Contact</a>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      }`}>
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <a 
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="transition-transform duration-300 hover:scale-110"
+            >
+              <img 
+                src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" 
+                alt="Rogue Automotive Logo" 
+                className="h-12 sm:h-16 w-auto animate-fade-in"
+              />
+            </a>
+            <div className="hidden md:flex space-x-8">
+              <a 
+                href="#services" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-maroon after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                  isScrolled ? 'text-rogue-dark hover:text-rogue-maroon' : 'text-white hover:text-rogue-silver'
+                }`}
+              >
+                Services
+              </a>
+              <a 
+                href="#about" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-maroon after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                  isScrolled ? 'text-rogue-dark hover:text-rogue-maroon' : 'text-white hover:text-rogue-silver'
+                }`}
+              >
+                About
+              </a>
+              <a 
+                href="#contact" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-maroon after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                  isScrolled ? 'text-rogue-dark hover:text-rogue-maroon' : 'text-white hover:text-rogue-silver'
+                }`}
+              >
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       </nav>

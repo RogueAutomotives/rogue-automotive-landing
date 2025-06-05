@@ -6,6 +6,7 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
 
 const Index = () => {
   return (
@@ -44,6 +45,7 @@ const Index = () => {
         <Testimonials />
         <Contact />
         <Footer />
+        <BackToTop />
       </div>
     </>
   );

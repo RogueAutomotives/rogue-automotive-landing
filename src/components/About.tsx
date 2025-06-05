@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 
 const About = () => {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 bg-rogue-light">
+    <section id="about" className="py-12 sm:py-16 md:py-20 bg-rogue-light scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 md:mb-8 animate-fade-in">
