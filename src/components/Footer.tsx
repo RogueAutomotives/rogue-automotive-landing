@@ -10,9 +10,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div className="animate-fade-in col-span-2 sm:col-span-1">
             <img 
-              src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" 
-              alt="Rogue Automotive Logo" 
-              className="h-10 sm:h-12 w-auto mb-3 sm:mb-4 transition-transform duration-300 hover:scale-110"
+              src="/lovable-uploads/RogueAutoWhiteLogo.png" 
+              alt="Rogue Automotive White Logo" 
+              className="h-34 sm:h-12 w-auto mb-3 sm:mb-4 transition-transform duration-300 hover:scale-110"
             />
             <p className="text-sm sm:text-base text-rogue-silver">
               Your trusted automotive partner for wash, sales, and rentals.
