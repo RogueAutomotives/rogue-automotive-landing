@@ -27,6 +27,7 @@ jobs:
         run: |
           npm run build
           echo "www.rogueautomotiveja.com" > dist/CNAME
+          touch dist/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
