@@ -1,31 +1,35 @@
-name: Deploy React App to GitHub Pages
+name: Manual Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Manual trigger from GitHub UI
+
+permissions:
+  contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '23'
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build project
-        run: npm run build
+      - name: Build for Production
+        run: |
+          npm run build
+          echo "www.rogueautomotiveja.com" > dist/CNAME
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist
