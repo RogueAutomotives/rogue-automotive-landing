@@ -9,21 +9,24 @@ const Services = () => {
       title: "Car Wash",
       description: "Premium hand wash and detailing services that make your vehicle shine like new.",
       features: ["Hand wash & wax", "Interior detailing", "Engine cleaning", "Paint protection"],
-      cta: "Book a Car Wash"
+      cta: "View our Rates",
+      url: "https://rogueautomotive.com/car-wash"
     },
     {
       icon: <Car className="h-8 w-8 text-rogue-maroon" />,
       title: "Car Sales",
       description: "Carefully selected vehicles, inspected and ready for the road.",
-      features: ["Quality guaranteed", "Fair pricing", "Financing options", "Trade-ins welcome"],
-      cta: "Browse Cars for Sale"
+      features: ["Quality guaranteed", "Fair pricing", "Trade-ins welcome"],
+      cta: "Browse Cars for Sale",
+      url: "https://rogueautomotive.com/cars-for-sale"
     },
     {
       icon: <Key className="h-8 w-8 text-rogue-maroon" />,
       title: "Car Rentals",
       description: "Flexible and affordable car rental options for any occasion.",
       features: ["Daily & weekly rates", "Insurance included", "24/7 support", "Multiple locations"],
-      cta: "Rent a Vehicle"
+      cta: "Rent a Vehicle",
+      url: "https://rogueautomotive.com/rentals"
     }
   ];
 
@@ -41,7 +44,7 @@ const Services = () => {
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {services.map((service, index) => (
-            <Card key={index} className={`group hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:scale-105 hover:-translate-y-2 animate-fade-in cursor-pointer`} style={{animationDelay: `${index * 200}ms`}}>
+            <Card key={index} className={`group hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:scale-105 hover:-translate-y-2 animate-fade-in cursor-pointer flex flex-col h-full`} style={{animationDelay: `${index * 200}ms`}}>
               <CardHeader className="text-center pb-2 sm:pb-4">
                 <div className="mx-auto mb-3 sm:mb-4 p-3 sm:p-4 bg-rogue-light rounded-full w-fit group-hover:bg-rogue-maroon/10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
                   {service.icon}
@@ -53,7 +56,7 @@ const Services = () => {
                   {service.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex flex-col flex-grow">
                 <ul className="space-y-2 mb-4 sm:mb-6">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-sm sm:text-base text-rogue-charcoal transition-all duration-300 group-hover:translate-x-2">
@@ -62,9 +65,14 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-rogue-maroon hover:bg-rogue-maroon/90 text-white font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/30 py-5 sm:py-6">
-                  {service.cta}
-                </Button>
+                <div className="mt-auto">
+                  <Button 
+                    className="w-full bg-rogue-maroon hover:bg-rogue-maroon/90 text-white font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/30 py-5 sm:py-6"
+                    onClick={() => window.open(service.url, '_blank')}
+                  >
+                    {service.cta}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/RogueAutoWhiteLogo.png" 
               alt="Rogue Automotive White Logo" 
-              className="h-34 sm:h-12 w-auto mb-3 sm:mb-4 transition-transform duration-300 hover:scale-110"
+              className="h-34 sm:h-16 w-auto mb-3 sm:mb-4 transition-transform duration-300 hover:scale-110"
             />
             <p className="text-sm sm:text-base text-rogue-silver">
               Your trusted automotive partner for wash, sales, and rentals.
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-rogue-charcoal/30 text-center text-sm sm:text-base text-rogue-silver">
-          <p>&copy; 2024 Rogue Automotive Ja. All rights reserved.</p>
+          <p>&copy; 2025 Rogue Automotive Ja. All rights reserved.</p>
         </div>
       </div>
     </footer>

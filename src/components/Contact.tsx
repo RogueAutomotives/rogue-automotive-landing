@@ -96,7 +96,7 @@ const Contact = () => {
                 <CardContent className="p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4">Visit Us</h3>
                   <div className="space-y-2 sm:space-y-3 text-sm sm:text-base text-rogue-charcoal">
-                    <p><strong>Address:</strong> 14 Westminster Rd, Kingston 10, Jamaica</p>
+                    <p><strong>Address:</strong> 17 Westminster Rd, Kingston 10, Jamaica</p>
                     <p><strong>Phone:</strong> (876) 860-5061</p>
                     <p><strong>Email:</strong> info@rogueautomotiveja.com</p>
                   </div>
