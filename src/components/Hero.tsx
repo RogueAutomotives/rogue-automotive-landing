@@ -101,7 +101,7 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in animation-delay-1000">
             <Button size="lg" className="bg-rogue-maroon hover:bg-rogue-maroon/90 text-white border-0 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/50">
-              Book a Car Wash
+              Explore Subscription Options
             </Button>
             <Button size="lg" className="bg-white hover:bg-gray-100 text-rogue-dark border-0 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
               Browse Cars for Sale

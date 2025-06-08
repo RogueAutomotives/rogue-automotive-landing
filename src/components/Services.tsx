@@ -9,7 +9,7 @@ const Services = () => {
       title: "Car Wash",
       description: "Premium hand wash and detailing services that make your vehicle shine like new.",
       features: ["Hand wash & wax", "Interior detailing", "Engine cleaning", "Paint protection"],
-      cta: "View our Rates",
+      cta: "Explore Subscription Options",
       url: "https://rogueautomotive.com/car-wash"
     },
     {
@@ -24,7 +24,7 @@ const Services = () => {
       icon: <Key className="h-8 w-8 text-rogue-maroon" />,
       title: "Car Rentals",
       description: "Flexible and affordable car rental options for any occasion.",
-      features: ["Daily & weekly rates", "Insurance included", "24/7 support", "Multiple locations"],
+      features: ["Daily & weekly rates", "Insurance included", "24/7 support"],
       cta: "Rent a Vehicle",
       url: "https://rogueautomotive.com/rentals"
     }
@@ -68,7 +68,7 @@ const Services = () => {
                 <div className="mt-auto">
                   <Button 
                     className="w-full bg-rogue-maroon hover:bg-rogue-maroon/90 text-white font-montserrat font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/30 py-5 sm:py-6"
-                    onClick={() => window.open(service.url, '_blank')}
+                    // onClick={() => window.open(service.url, '_blank')}
                   >
                     {service.cta}
                   </Button>

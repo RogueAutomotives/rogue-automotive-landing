@@ -32,14 +32,14 @@ const Testimonials = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className={`border-0 shadow-lg transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-xl animate-fade-in cursor-pointer`} style={{animationDelay: `${index * 200}ms`}}>
-              <CardContent className="p-4 sm:p-6">
+              <CardContent className="p-4 sm:p-6 flex flex-col h-[200px]">
                 <div className="flex mb-3 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current transition-transform duration-300 hover:scale-125" />
                   ))}
                 </div>
-                <p className="text-sm sm:text-base text-rogue-charcoal mb-3 sm:mb-4 italic transition-colors duration-300 hover:text-rogue-dark">"{testimonial.text}"</p>
-                <p className="text-sm sm:text-base font-montserrat font-semibold text-rogue-dark transition-colors duration-300 hover:text-rogue-maroon">
+                <p className="text-sm sm:text-base text-rogue-charcoal mb-3 sm:mb-4 italic transition-colors duration-300 hover:text-rogue-dark flex-grow">"{testimonial.text}"</p>
+                <p className="text-sm sm:text-base font-montserrat font-semibold text-rogue-dark transition-colors duration-300 hover:text-rogue-maroon mt-auto">
                   - {testimonial.name}
                 </p>
               </CardContent>
