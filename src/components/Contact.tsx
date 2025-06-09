@@ -24,7 +24,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 md:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 animate-fade-in">
               Get In Touch
@@ -34,65 +34,70 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
-            {/* Contact Form */}
-            <Card className="border-0 shadow-lg animate-fade-in animation-delay-500 transition-all duration-300 hover:shadow-xl">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl font-montserrat font-bold text-rogue-dark">
-                  Send us a message
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 sm:p-6">
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div>
-                    <Input
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Select onValueChange={(value) => setFormData({...formData, service: value})}>
-                      <SelectTrigger className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11">
-                        <SelectValue placeholder="Service Interested In" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="car-wash">Car Wash</SelectItem>
-                        <SelectItem value="car-sales">Car Sales</SelectItem>
-                        <SelectItem value="car-rentals">Car Rentals</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="border-rogue-silver focus:border-rogue-maroon min-h-[100px] sm:min-h-[120px] transition-all duration-300 focus:scale-105"
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-rogue-maroon hover:bg-rogue-maroon/90 text-white font-montserrat font-semibold py-5 sm:py-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/50">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Contact Form - Takes up 2 columns on large screens */}
+            <div className="lg:col-span-2">
+              <Card className="border-0 shadow-lg animate-fade-in animation-delay-500 transition-all duration-300 hover:shadow-xl h-full">
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-xl sm:text-2xl font-montserrat font-bold text-rogue-dark">
+                    Send us a message
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 sm:p-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <Input
+                          placeholder="Your Name"
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Input
+                          type="email"
+                          placeholder="Your Email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Select onValueChange={(value) => setFormData({...formData, service: value})}>
+                        <SelectTrigger className="border-rogue-silver focus:border-rogue-maroon transition-all duration-300 focus:scale-105 h-10 sm:h-11">
+                          <SelectValue placeholder="Service Interested In" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="car-wash">Car Wash</SelectItem>
+                          <SelectItem value="car-sales">Car Sales</SelectItem>
+                          <SelectItem value="car-rentals">Car Rentals</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Textarea
+                        placeholder="Your Message"
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        className="border-rogue-silver focus:border-rogue-maroon min-h-[120px] sm:min-h-[140px] transition-all duration-300 focus:scale-105"
+                        required
+                      />
+                    </div>
+                    <Button type="submit" className="w-full bg-rogue-maroon hover:bg-rogue-maroon/90 text-white font-montserrat font-semibold py-5 sm:py-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-rogue-maroon/50">
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
 
-            <div className="space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in animation-delay-700">
+            {/* Contact Info and Map - Takes up 1 column on large screens */}
+            <div className="space-y-6 animate-fade-in animation-delay-700">
               <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
                 <CardContent className="p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4">Visit Us</h3>
@@ -114,28 +119,31 @@ const Contact = () => {
                   </div>
                 </CardContent>
               </Card>
-
-              <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
-                <CardContent className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-rogue-maroon" />
-                    Find Us
-                  </h3>
-                  <div className="w-full h-[250px] sm:h-[300px] rounded-lg overflow-hidden">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.1799095152896!2d-76.80362222509278!3d18.016852384367457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb3f21c2c78e9d%3A0x8a7686bf5f0b8bc!2sRogue%20Automotive%20Ltd!5e0!3m2!1sen!2sjm!4v1749444466821!5m2!1sen!2sjm" 
-                      width="100%" 
-                      height="100%" 
-                      style={{border: 0}} 
-                      allowFullScreen={true} 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full h-full"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
             </div>
+          </div>
+
+          {/* Map Section - Full width below the grid */}
+          <div className="mt-8 sm:mt-12">
+            <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl animate-fade-in animation-delay-900">
+              <CardContent className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4 flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-rogue-maroon" />
+                  Find Us
+                </h3>
+                <div className="w-full h-[300px] sm:h-[400px] rounded-lg overflow-hidden">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.1799095152896!2d-76.80362222509278!3d18.016852384367457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb3f21c2c78e9d%3A0x8a7686bf5f0b8bc!2sRogue%20Automotive%20Ltd!5e0!3m2!1sen!2sjm!4v1749444466821!5m2!1sen!2sjm" 
+                    width="100%" 
+                    height="100%" 
+                    style={{border: 0}} 
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
