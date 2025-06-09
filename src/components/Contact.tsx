@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,10 @@ const Contact = () => {
     service: '',
     message: ''
   });
+
+  const { elementRef: headerRef, isVisible: isHeaderVisible } = useScrollAnimation();
+  const { elementRef: formRef, isVisible: isFormVisible } = useScrollAnimation();
+  const { elementRef: infoRef, isVisible: isInfoVisible } = useScrollAnimation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,19 +29,19 @@ const Contact = () => {
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16" ref={headerRef}>
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 transition-all duration-500 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               Get In Touch
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-rogue-charcoal animate-fade-in animation-delay-300">
+            <p className={`text-base sm:text-lg md:text-xl text-rogue-charcoal transition-all duration-500 delay-150 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               Ready to experience the Rogue difference? Contact us today.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Contact Form - Takes up 2 columns on large screens */}
-            <div className="lg:col-span-2">
-              <Card className="border-0 shadow-lg animate-fade-in animation-delay-500 transition-all duration-300 hover:shadow-xl h-full">
+            <div className="lg:col-span-2" ref={formRef}>
+              <Card className={`border-0 shadow-lg transition-all duration-300 hover:shadow-xl h-full transition-all duration-500 ${isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="text-xl sm:text-2xl font-montserrat font-bold text-rogue-dark">
                     Send us a message
@@ -97,8 +101,8 @@ const Contact = () => {
             </div>
 
             {/* Contact Info and Map - Takes up 1 column on large screens */}
-            <div className="space-y-6 animate-fade-in animation-delay-700">
-              <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
+            <div className="space-y-6" ref={infoRef}>
+              <Card className={`border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 transition-all duration-500 ${isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <CardContent className="p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4">Visit Us</h3>
                   <div className="space-y-2 sm:space-y-3 text-sm sm:text-base text-rogue-charcoal">
@@ -109,7 +113,7 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
+              <Card className={`border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 transition-all duration-500 delay-100 ${isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <CardContent className="p-4 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4">Business Hours</h3>
                   <div className="space-y-2 text-sm sm:text-base text-rogue-charcoal">

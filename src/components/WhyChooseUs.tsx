@@ -1,6 +1,10 @@
 import { Shield, Clock, Star, MapPin } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const WhyChooseUs = () => {
+  const { elementRef: headerRef, isVisible: isHeaderVisible } = useScrollAnimation();
+  const { elementRef: featuresRef, isVisible: isFeaturesVisible } = useScrollAnimation();
+
   const whyChooseUs = [
     { icon: <Shield className="h-6 w-6" />, title: "Trusted by hundreds", description: "Over 500+ satisfied customers" },
     { icon: <Clock className="h-6 w-6" />, title: "Fast & reliable service", description: "Quick turnaround times" },
@@ -11,18 +15,21 @@ const WhyChooseUs = () => {
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-rogue-dark text-white">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold mb-4 sm:mb-6 animate-fade-in">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16" ref={headerRef}>
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold mb-4 sm:mb-6 transition-all duration-500 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Why Choose Rogue?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-rogue-silver max-w-3xl mx-auto animate-fade-in animation-delay-300">
+          <p className={`text-base sm:text-lg md:text-xl text-rogue-silver max-w-3xl mx-auto transition-all duration-500 delay-150 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             We're committed to delivering exceptional value and service in everything we do.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8" ref={featuresRef}>
           {whyChooseUs.map((item, index) => (
-            <div key={index} className={`text-center group animate-fade-in hover:scale-105 transition-all duration-500 cursor-pointer`} style={{animationDelay: `${index * 150}ms`}}>
+            <div 
+              key={index} 
+              className={`text-center group hover:scale-105 transition-all duration-500 cursor-pointer transition-all duration-500 delay-${index * 75} ${isFeaturesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            >
               <div className="mx-auto mb-3 sm:mb-4 p-3 sm:p-4 bg-rogue-maroon rounded-full w-fit group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-rogue-maroon/50">
                 {item.icon}
               </div>

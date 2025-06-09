@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, Sparkles, Key, Check } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const Services = () => {
+  const { elementRef: headerRef, isVisible: isHeaderVisible } = useScrollAnimation();
+  const { elementRef: servicesRef, isVisible: isServicesVisible } = useScrollAnimation();
+
   const services = [
     {
       icon: <Sparkles className="h-8 w-8 text-rogue-maroon" />,
@@ -33,18 +37,21 @@ const Services = () => {
   return (
     <section id="services" className="py-12 sm:py-16 md:py-20 bg-white scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 animate-fade-in">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16" ref={headerRef}>
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-rogue-dark mb-4 sm:mb-6 transition-all duration-500 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Our Services
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-rogue-charcoal max-w-3xl mx-auto animate-fade-in animation-delay-300">
+          <p className={`text-base sm:text-lg md:text-xl text-rogue-charcoal max-w-3xl mx-auto transition-all duration-500 delay-150 ${isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             From keeping your car pristine to finding your perfect vehicle, we've got you covered.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8" ref={servicesRef}>
           {services.map((service, index) => (
-            <Card key={index} className={`group hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:scale-105 hover:-translate-y-2 animate-fade-in cursor-pointer flex flex-col h-full`} style={{animationDelay: `${index * 200}ms`}}>
+            <Card 
+              key={index} 
+              className={`group hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:scale-105 hover:-translate-y-2 cursor-pointer flex flex-col h-full transition-all duration-500 delay-${index * 100} ${isServicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            >
               <CardHeader className="text-center pb-2 sm:pb-4">
                 <div className="mx-auto mb-3 sm:mb-4 p-3 sm:p-4 bg-rogue-light rounded-full w-fit group-hover:bg-rogue-maroon/10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
                   {service.icon}
