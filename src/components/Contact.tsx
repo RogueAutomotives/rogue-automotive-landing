@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -110,6 +111,27 @@ const Contact = () => {
                     <p><strong>Monday - Friday:</strong> 8:00 AM - 7:00 PM</p>
                     <p><strong>Saturday:</strong> 9:00 AM - 6:00 PM</p>
                     <p><strong>Sunday:</strong> 10:00 AM - 4:00 PM</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
+                <CardContent className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-montserrat font-bold text-rogue-dark mb-3 sm:mb-4 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-rogue-maroon" />
+                    Find Us
+                  </h3>
+                  <div className="w-full h-[250px] sm:h-[300px] rounded-lg overflow-hidden">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.1799095152896!2d-76.80362222509278!3d18.016852384367457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb3f21c2c78e9d%3A0x8a7686bf5f0b8bc!2sRogue%20Automotive%20Ltd!5e0!3m2!1sen!2sjm!4v1749444466821!5m2!1sen!2sjm" 
+                      width="100%" 
+                      height="100%" 
+                      style={{border: 0}} 
+                      allowFullScreen={true} 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="w-full h-full"
+                    />
                   </div>
                 </CardContent>
               </Card>
