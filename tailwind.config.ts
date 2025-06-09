@@ -21,16 +21,15 @@ export default {
 		extend: {
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],
-				'opensans': ['Open Sans', 'sans-serif'],
+				'roboto': ['Roboto', 'sans-serif'],
 			},
 			colors: {
-				// Rouge color palette
-				'rouge': {
-					red: '#e63946',
-					black: '#1d1d1d',
-					'light-gray': '#f8f9fa',
-					'dark-gray': '#6c757d',
-				},
+				// Automotive color palette
+				'rogue-maroon': '#722F37',
+				'rogue-dark': '#1a1a1a',
+				'rogue-charcoal': '#2d2d2d',
+				'rogue-silver': '#c0c0c0',
+				'rogue-light': '#f8f9fa',
 				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -117,24 +116,13 @@ export default {
 						opacity: '1',
 						transform: 'translateX(0)'
 					}
-				},
-				'fade-in-right': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateX(-20px)'
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateX(0)'
-					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
-				'slide-in-left': 'slide-in-left 0.8s ease-out',
-				'fade-in-right': 'fade-in-right 0.5s ease-out'
+				'slide-in-left': 'slide-in-left 0.8s ease-out'
 			}
 		}
 	},
