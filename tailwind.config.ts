@@ -25,7 +25,7 @@ export default {
 			},
 			colors: {
 				// Automotive color palette
-				'rogue-maroon': '#722F37',
+				'rogue-maroon': '#e63946',
 				'rogue-dark': '#1a1a1a',
 				'rogue-charcoal': '#2d2d2d',
 				'rogue-silver': '#c0c0c0',
