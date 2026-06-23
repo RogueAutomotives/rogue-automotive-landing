@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rogue Automotive</title>
+    <!--
+      GitHub Pages SPA fallback (rafgraph/spa-github-pages). GitHub Pages serves
+      this 404.html for any unknown path; it rewrites the URL into a query string
+      and redirects to index.html, where a small decoder (in index.html) restores
+      the real route so react-router can handle deep links / hard refreshes.
+      Custom domain (not project pages) → pathSegmentsToKeep = 0.
+    -->
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
