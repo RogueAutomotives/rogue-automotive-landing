@@ -1,7 +1,5 @@
 /** Talks to the backend contact endpoint (shared SMTP -> business inbox). */
-
-const API_BASE: string =
-  (import.meta.env.VITE_API_URL as string | undefined) ?? "https://api.rogueautomotiveja.com/api";
+import { API_BASE } from "./api";
 
 export interface ContactPayload {
   fullName: string;
