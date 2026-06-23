@@ -24,12 +24,17 @@ export default {
 				'roboto': ['Roboto', 'sans-serif'],
 			},
 			colors: {
-				// Automotive color palette
-				'rogue-maroon': '#e63946',
-				'rogue-dark': '#1a1a1a',
-				'rogue-charcoal': '#2d2d2d',
+				// Rogue brand palette — accent red unified with the booking app (#dc2626),
+				// dark tones shifted to slate per the design system. `rogue-maroon` keeps
+				// its name for backward compat but now points to the brand red.
+				'rogue-maroon': '#dc2626',
+				'rogue-red': '#dc2626',
+				'rogue-red-dark': '#b91c1c',
+				'rogue-dark': '#0a0f1a',
+				'rogue-charcoal': '#1e293b',
+				'rogue-slate': '#334155',
 				'rogue-silver': '#c0c0c0',
-				'rogue-light': '#f8f9fa',
+				'rogue-light': '#f8fafc',
 				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
