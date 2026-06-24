@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import CarWash from "./pages/CarWash";
 import CarSales from "./pages/CarSales";
 import CarRentals from "./pages/CarRentals";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/car-wash" element={<CarWash />} />
             <Route path="/car-sales" element={<CarSales />} />
             <Route path="/car-rentals" element={<CarRentals />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

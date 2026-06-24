@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -93,9 +94,9 @@ const Footer = () => {
               &copy; 2025 Rogue Automotive Ja. All rights reserved.
             </p>
             <div className="flex space-x-6 text-rogue-silver text-sm">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link to="/privacy#cookies" className="hover:text-white transition-colors">Cookie Policy</Link>
             </div>
           </div>
         </div>
