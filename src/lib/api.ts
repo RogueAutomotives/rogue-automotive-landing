@@ -41,3 +41,43 @@ export async function getGallery(): Promise<GalleryItem[]> {
 export async function getTestimonials(): Promise<Testimonial[]> {
   return getJson<Testimonial[]>("/testimonials");
 }
+
+export interface DetailingPackage {
+  id: string;
+  name: string;
+  description: string;
+  basePrice: number;
+  isFeatured: boolean;
+}
+
+interface DetailingServiceListItem {
+  id: string;
+  name: string;
+  description: string;
+  category: number;
+  basePrice: number;
+  isActive: boolean;
+  bookingType?: number;
+  isFeatured?: boolean;
+}
+
+const PACKAGE_CATEGORY = 4; // ServiceCategory.Package
+const CONSULTATION = 2; // BookingType.Consultation (quote-based — excluded from tiers)
+
+/**
+ * The customer-facing three-tier detail lineup (Package category, standard
+ * pricing), ordered cheapest → priciest. Excludes quote-based premium protection.
+ */
+export async function getDetailingPackages(): Promise<DetailingPackage[]> {
+  const items = await getJson<DetailingServiceListItem[]>("/detailingservices");
+  return items
+    .filter((s) => s.isActive && s.category === PACKAGE_CATEGORY && s.bookingType !== CONSULTATION)
+    .sort((a, b) => a.basePrice - b.basePrice)
+    .map((s) => ({
+      id: s.id,
+      name: s.name,
+      description: s.description,
+      basePrice: s.basePrice,
+      isFeatured: !!s.isFeatured,
+    }));
+}

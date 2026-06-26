@@ -8,13 +8,15 @@ const BOOKING_APP = "https://wash.rogueautomotiveja.com";
 /** Append UTM params so the booking app can attribute traffic from this site. */
 export function bookingUrl(
   path = "/book-a-detail",
-  opts: { source?: string; medium?: string; campaign?: string; content?: string } = {},
+  opts: { source?: string; medium?: string; campaign?: string; content?: string; service?: string } = {},
 ): string {
   const params = new URLSearchParams({
     utm_source: opts.source ?? "landing",
     utm_medium: opts.medium ?? "web",
     utm_campaign: opts.campaign ?? "hub",
     ...(opts.content ? { utm_content: opts.content } : {}),
+    // Pre-select a specific service/tier in the booking flow when provided.
+    ...(opts.service ? { service: opts.service } : {}),
   });
   return `${BOOKING_APP}${path}?${params.toString()}`;
 }
