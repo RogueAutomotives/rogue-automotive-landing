@@ -16,26 +16,31 @@ import { getDetailingPackages } from "@/lib/api";
 // them as bullets here). Keyed by the tier's service name so live data drives
 // price / featured / ordering while the presentation stays polished.
 const TIER_CONTENT: Record<string, { blurb: string; points: string[] }> = {
-  "Express Detail": {
-    blurb: "A quick refresh inside and out — the easy way to keep your car sharp between full details.",
-    points: ["Interior vacuum & wipe-down", "Interior & exterior glass", "Hand wash & tyre shine", "About 90 minutes"],
+  "Bronze Detail": {
+    blurb: "Entry-level detailing for when you want more than a standard wash.",
+    points: ["Foam pre-wash + contact wash", "Wheels & tyres cleaned and dressed", "Full interior vacuum", "Interior surfaces + UV protection", "Streak-free glass"],
   },
-  "Full Detail": {
-    blurb: "A complete inside-and-out reset that brings back the showroom feel.",
-    points: ["Everything in Express", "Deep interior shampoo & leather care", "Foam wash, clay bar & sealant", "Vents & door jambs"],
+  "Silver Detail": {
+    blurb: "Our recommended entry-level detail — smoother, protected paint and a cleaner cabin.",
+    points: ["Everything in Bronze", "Iron fallout removal + deep wheels", "Air-vent detailing", "Plastic & vinyl rejuvenation", "Spray ceramic sealant"],
   },
-  "Showroom Detail": {
-    blurb: "The full showroom treatment — meticulous, top to bottom, with lasting protection.",
-    points: ["Everything in Full Detail", "One-step paint enhancement", "Ceramic-spray protection", "Engine bay + interior care"],
+  "Gold Detail": {
+    blurb: "Best value — a big step up in appearance and lasting protection, inside and out.",
+    points: ["Everything in Silver", "Full clay-bar decontamination", "Seat & carpet shampoo", "Engine-bay wipe-down", "Ceramic spray + gloss enhancement"],
+  },
+  "Platinum Paint Enhancement Detail": {
+    blurb: "Paint enhancement — machine-polished gloss and a showroom-quality finish.",
+    points: ["Everything in Gold", "Single-stage machine polish", "Swirl-mark reduction", "Paint gloss restoration", "Premium protection"],
   },
 };
 
 // Shown only if the live catalog can't be reached, so the marketing page never
 // renders an empty pricing section.
 const FALLBACK_TIERS = [
-  { name: "Express Detail", featured: false },
-  { name: "Full Detail", featured: true },
-  { name: "Showroom Detail", featured: false },
+  { name: "Bronze Detail", featured: false },
+  { name: "Silver Detail", featured: false },
+  { name: "Gold Detail", featured: true },
+  { name: "Platinum Paint Enhancement Detail", featured: false },
 ];
 
 const formatFrom = (price: number) => `From J$${price.toLocaleString()}`;
@@ -87,13 +92,13 @@ const PackagesSection = () => {
         </div>
 
         {isLoading ? (
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="h-80 rounded-2xl bg-slate-100 animate-pulse" />
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
             {cards.map((pkg) => (
               <div
                 key={pkg.name}
