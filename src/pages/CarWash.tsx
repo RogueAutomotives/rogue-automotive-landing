@@ -18,15 +18,15 @@ import { getDetailingPackages } from "@/lib/api";
 const TIER_CONTENT: Record<string, { blurb: string; points: string[] }> = {
   "Bronze Detail": {
     blurb: "Entry-level detailing for when you want more than a standard wash.",
-    points: ["Foam pre-wash + contact wash", "Wheels & tyres cleaned and dressed", "Full interior vacuum", "Interior surfaces + UV protection", "Streak-free glass"],
+    points: ["Foam pre-wash + contact wash", "Wheels & tyres cleaned and dressed", "Full interior vacuum", "Seat steam & shampoo", "Interior surfaces + UV protection", "Streak-free glass"],
   },
   "Silver Detail": {
-    blurb: "Our recommended entry-level detail — smoother, protected paint and a cleaner cabin.",
-    points: ["Everything in Bronze", "Iron fallout removal + deep wheels", "Air-vent detailing", "Plastic & vinyl rejuvenation", "Spray ceramic sealant"],
+    blurb: "Our recommended entry-level detail — a deeper clean inside and out.",
+    points: ["Everything in Bronze", "Iron fallout removal + deep wheels", "Air-vent detailing", "Seat & carpet steam and shampoo", "Plastic & vinyl rejuvenation"],
   },
   "Gold Detail": {
     blurb: "Best value — a big step up in appearance and lasting protection, inside and out.",
-    points: ["Everything in Silver", "Full clay-bar decontamination", "Seat & carpet shampoo", "Engine-bay wipe-down", "Ceramic spray + gloss enhancement"],
+    points: ["Everything in Silver", "Full clay-bar decontamination", "Engine-bay wipe-down", "Plastic restoration treatment", "Ceramic spray + gloss enhancement"],
   },
   "Platinum Paint Enhancement Detail": {
     blurb: "Paint enhancement — machine-polished gloss and a showroom-quality finish.",
