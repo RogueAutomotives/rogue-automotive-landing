@@ -22,7 +22,7 @@ const TIER_CONTENT: Record<string, { blurb: string; points: string[] }> = {
   },
   "Silver Detail": {
     blurb: "Our recommended entry-level detail — a deeper clean inside and out.",
-    points: ["Everything in Bronze", "Iron fallout removal + deep wheels", "Air-vent detailing", "Seat & carpet steam and shampoo", "Plastic & vinyl rejuvenation"],
+    points: ["Everything in Bronze", "Iron fallout removal + deep wheels", "Roof (headliner) & door deep clean", "Air-vent detailing", "Seat & carpet steam and shampoo", "Plastic & vinyl rejuvenation"],
   },
   "Gold Detail": {
     blurb: "Best value — a big step up in appearance and lasting protection, inside and out.",
