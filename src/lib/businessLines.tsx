@@ -35,7 +35,7 @@ export const BUSINESS_LINES: BusinessLine[] = [
     blurb:
       "Hand-picked, inspected vehicles ready for Jamaican roads — with honest pricing and trade-ins welcome.",
     features: ["Inspected & guaranteed", "Fair, transparent pricing", "Trade-ins welcome"],
-    status: "soon",
+    status: "live",
     route: "/car-sales",
     icon: Car,
     gradient: "from-rogue-dark via-rogue-charcoal to-rogue-slate",
@@ -47,7 +47,7 @@ export const BUSINESS_LINES: BusinessLine[] = [
     blurb:
       "Daily and weekly rentals with insurance included and round-the-clock support — for business or pleasure.",
     features: ["Daily & weekly rates", "Insurance included", "24/7 support"],
-    status: "soon",
+    status: "live",
     route: "/car-rentals",
     icon: Key,
     gradient: "from-rogue-dark via-rogue-charcoal to-rogue-slate",

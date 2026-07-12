@@ -30,8 +30,8 @@ const Services = () => {
               isHeaderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            Pick a business line to dive in. Our detailing service is live and bookable online today —
-            sales and rentals are launching soon.
+            Pick a business line to dive in. Detailing is bookable online, rentals take booking
+            requests, and our current vehicles for sale are ready to view.
           </p>
         </div>
 
