@@ -12,6 +12,8 @@ const SubPageNav = () => (
           src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png"
           alt="Rogue Automotive"
           className="h-10 sm:h-12 w-auto"
+          // Render the dark logo as white so it stands out on the dark header
+          style={{ filter: "brightness(0) invert(1)" }}
         />
       </Link>
       <div className="flex items-center gap-4 sm:gap-6">
