@@ -16,19 +16,51 @@ interface SaleVehicle {
   type: string;
   /** Formatted asking price, or undefined for price on request. */
   price?: string;
+  /** Photo in public/lovable-uploads/. Falls back to an on-brand tile until the file exists. */
+  image: string;
   blurb: string;
   points: string[];
 }
 
+// Drop the real vehicle photos into public/lovable-uploads/ with these names and
+// they appear automatically (landscape, ~4:3 works best).
 const INVENTORY: SaleVehicle[] = [
   {
     name: "2016 Land Rover Discovery Sport",
     type: "SUV",
     price: "J$2,600,000",
+    image: "/lovable-uploads/sale-2016-land-rover-discovery-sport.jpg",
     blurb: "A premium compact SUV that's as comfortable in town as it is capable off the beaten path.",
     points: ["2.0L turbocharged engine", "Automatic • 4WD", "Fully inspected by our team", "Test drives welcome"],
   },
 ];
+
+/** Vehicle photo with an on-brand fallback tile shown until the real image is uploaded. */
+function CarPhoto({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        className="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex items-center justify-center mb-4"
+        role="img"
+        aria-label={alt}
+      >
+        <Car className="h-10 w-10 text-white/25" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className="aspect-[4/3] w-full object-cover rounded-xl mb-4"
+    />
+  );
+}
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -313,6 +345,7 @@ const CarSales = () => {
                   key={car.name}
                   className="relative flex flex-col rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
+                  <CarPhoto src={car.image} alt={`${car.name} — for sale`} />
                   <span className="self-start text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-rogue-light text-rogue-charcoal mb-3">
                     {car.type}
                   </span>

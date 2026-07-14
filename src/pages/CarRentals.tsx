@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Check, Key, MessageCircle, Phone, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { Check, Key, Car, MessageCircle, Phone, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,15 +15,20 @@ interface RentalCar {
   name: string;
   type: string;
   pricePerDay: number;
+  /** Photo in public/lovable-uploads/. Falls back to an on-brand tile until the file exists. */
+  image: string;
   blurb: string;
   points: string[];
 }
 
+// Drop the real vehicle photos into public/lovable-uploads/ with these names and
+// they appear automatically (landscape, ~4:3 works best).
 const FLEET: RentalCar[] = [
   {
     name: "Honda Odyssey",
     type: "Minivan",
     pricePerDay: 10000,
+    image: "/lovable-uploads/rental-honda-odyssey.jpg",
     blurb: "Room for the whole crew — airport runs, family trips and group outings in comfort.",
     points: ["Seats up to 7", "Automatic transmission", "Cold A/C throughout", "Generous luggage space"],
   },
@@ -31,10 +36,38 @@ const FLEET: RentalCar[] = [
     name: "Nissan Teana",
     type: "Sedan",
     pricePerDay: 9000,
+    image: "/lovable-uploads/rental-nissan-teana.jpg",
     blurb: "A smooth, executive-class sedan for business trips and everyday driving.",
     points: ["Seats 5", "Automatic transmission", "Cold A/C", "Comfortable highway cruiser"],
   },
 ];
+
+/** Vehicle photo with an on-brand fallback tile shown until the real image is uploaded. */
+function CarPhoto({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        className="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex items-center justify-center mb-4"
+        role="img"
+        aria-label={alt}
+      >
+        <Car className="h-10 w-10 text-white/25" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className="aspect-[4/3] w-full object-cover rounded-xl mb-4"
+    />
+  );
+}
 
 const formatJmd = (n: number) => `J$${n.toLocaleString()}`;
 
@@ -361,6 +394,7 @@ const CarRentals = () => {
                   key={car.name}
                   className="relative flex flex-col rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
+                  <CarPhoto src={car.image} alt={`${car.name} — available for rental`} />
                   <span className="self-start text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-rogue-light text-rogue-charcoal mb-3">
                     {car.type}
                   </span>
