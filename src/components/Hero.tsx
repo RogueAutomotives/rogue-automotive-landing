@@ -47,6 +47,8 @@ const Hero = () => {
                 src="/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png"
                 alt="Rogue Automotive"
                 className="h-11 sm:h-14 w-auto"
+                // White over the dark hero at the top; keep the original dark logo once the header turns white on scroll
+                style={{ filter: isScrolled ? undefined : "brightness(0) invert(1)" }}
               />
             </a>
 
