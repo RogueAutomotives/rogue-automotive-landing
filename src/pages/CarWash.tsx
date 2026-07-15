@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { Check, ArrowRight, Sparkles, MessageCircle } from "lucide-react";
+import { Check, ArrowRight, Sparkles, MessageCircle, Gem, Wand2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SubPageNav from "@/components/SubPageNav";
 import Footer from "@/components/Footer";
@@ -150,15 +150,91 @@ const PackagesSection = () => {
             ))}
           </div>
         )}
-
-        <p className="text-center text-sm text-rogue-slate mt-8">
-          Looking for paint correction, ceramic or PPF? Those are quote-based — start in the booking app and a
-          specialist will assess your vehicle.
-        </p>
       </div>
     </section>
   );
 };
+
+// Quote-based premium services (no fixed catalog price). Each routes into the
+// booking app, where a specialist assesses the vehicle and quotes on the spot.
+const SPECIALIST_SERVICES = [
+  {
+    slug: "ceramic",
+    name: "Ceramic Coating",
+    icon: Gem,
+    blurb: "A durable liquid-glass layer that locks in gloss and makes washing effortless for years.",
+    points: ["Years of paint protection", "Deep, glass-like gloss", "Hydrophobic — water & dirt slide off", "UV & chemical resistance"],
+  },
+  {
+    slug: "paint-correction",
+    name: "Paint Correction",
+    icon: Wand2,
+    blurb: "Multi-stage machine polishing that removes swirls, scratches and oxidation for a flawless finish.",
+    points: ["Removes swirls & light scratches", "Restores depth and clarity", "Ideal prep before ceramic", "Showroom-level gloss"],
+  },
+  {
+    slug: "ppf",
+    name: "Paint Protection Film",
+    icon: ShieldCheck,
+    blurb: "A clear, self-healing film that shields high-impact areas from rock chips, scratches and road debris.",
+    points: ["Guards against rock chips", "Self-healing top layer", "Preserves resale value", "Virtually invisible"],
+  },
+];
+
+const SpecialistServices = () => (
+  <section className="py-16 sm:py-20 bg-slate-50">
+    <div className="container mx-auto px-4 sm:px-6">
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <p className="text-rogue-red font-montserrat font-semibold tracking-[0.2em] text-xs uppercase mb-3">
+          Specialist services
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-montserrat font-bold text-rogue-charcoal">
+          Signature paint &amp; protection
+        </h2>
+        <p className="text-base text-rogue-slate mt-3 leading-relaxed">
+          These are tailored to your vehicle and quoted after a free inspection — no fixed price. Start a
+          request and a specialist will assess your car and quote on the spot.
+        </p>
+      </div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+        {SPECIALIST_SERVICES.map((service) => {
+          const Icon = service.icon;
+          return (
+            <div
+              key={service.slug}
+              className="relative flex flex-col rounded-2xl p-6 bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl bg-rogue-red/10 flex items-center justify-center mb-4">
+                <Icon className="h-6 w-6 text-rogue-red" strokeWidth={1.75} />
+              </div>
+              <h3 className="text-xl font-montserrat font-bold text-rogue-charcoal mb-1">{service.name}</h3>
+              <p className="text-sm text-rogue-slate mb-4 leading-relaxed">{service.blurb}</p>
+              <ul className="space-y-1.5 mb-6">
+                {service.points.map((pt) => (
+                  <li key={pt} className="flex items-start text-sm text-rogue-slate">
+                    <Check className="h-4 w-4 text-rogue-red mr-2 mt-0.5 flex-shrink-0" />
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: `specialist-${service.slug}` })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto"
+              >
+                <Button className="w-full rounded-full font-montserrat font-semibold bg-rogue-charcoal hover:bg-rogue-dark text-white">
+                  Request a quote
+                </Button>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
 
 const CarWash = () => (
   <>
@@ -208,6 +284,9 @@ const CarWash = () => (
 
       {/* Packages (live from the catalog) */}
       <PackagesSection />
+
+      {/* Quote-based premium services: ceramic, paint correction, PPF */}
+      <SpecialistServices />
 
       {/* App features showcase — booking, loyalty, saved vehicles, pay, vouchers */}
       <AppShowcase />
