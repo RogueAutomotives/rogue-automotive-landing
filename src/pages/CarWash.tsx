@@ -156,8 +156,18 @@ const PackagesSection = () => {
 };
 
 // Quote-based premium services (no fixed catalog price). Each routes into the
-// booking app, where a specialist assesses the vehicle and quotes on the spot.
-const SPECIALIST_SERVICES = [
+// booking app, where a specialist assesses the vehicle and quotes on the spot —
+// except those flagged comingSoon, which we don't offer yet.
+interface SpecialistService {
+  slug: string;
+  name: string;
+  icon: typeof Gem;
+  blurb: string;
+  points: string[];
+  comingSoon?: boolean;
+}
+
+const SPECIALIST_SERVICES: SpecialistService[] = [
   {
     slug: "ceramic",
     name: "Ceramic Coating",
@@ -178,6 +188,8 @@ const SPECIALIST_SERVICES = [
     icon: ShieldCheck,
     blurb: "A clear, self-healing film that shields high-impact areas from rock chips, scratches and road debris.",
     points: ["Guards against rock chips", "Self-healing top layer", "Preserves resale value", "Virtually invisible"],
+    // Not offered yet — we don't have the tools/materials in-house for PPF.
+    comingSoon: true,
   },
 ];
 
@@ -203,8 +215,17 @@ const SpecialistServices = () => (
           return (
             <div
               key={service.slug}
-              className="relative flex flex-col rounded-2xl p-6 bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className={`relative flex flex-col rounded-2xl p-6 border transition-all duration-300 ${
+                service.comingSoon
+                  ? "bg-slate-50 border-slate-200"
+                  : "bg-white border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1"
+              }`}
             >
+              {service.comingSoon && (
+                <span className="absolute top-4 right-4 text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-slate-200 text-rogue-charcoal">
+                  Coming soon
+                </span>
+              )}
               <div className="w-11 h-11 rounded-xl bg-rogue-red/10 flex items-center justify-center mb-4">
                 <Icon className="h-6 w-6 text-rogue-red" strokeWidth={1.75} />
               </div>
@@ -218,16 +239,22 @@ const SpecialistServices = () => (
                   </li>
                 ))}
               </ul>
-              <a
-                href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: `specialist-${service.slug}` })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto"
-              >
-                <Button className="w-full rounded-full font-montserrat font-semibold bg-rogue-charcoal hover:bg-rogue-dark text-white">
-                  Request a quote
-                </Button>
-              </a>
+              {service.comingSoon ? (
+                <div className="mt-auto w-full rounded-full py-2.5 text-center font-montserrat font-semibold bg-slate-200 text-rogue-slate">
+                  Coming soon
+                </div>
+              ) : (
+                <a
+                  href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: `specialist-${service.slug}` })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto"
+                >
+                  <Button className="w-full rounded-full font-montserrat font-semibold bg-rogue-charcoal hover:bg-rogue-dark text-white">
+                    Request a quote
+                  </Button>
+                </a>
+              )}
             </div>
           );
         })}

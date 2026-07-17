@@ -5,6 +5,21 @@
 
 const BOOKING_APP = "https://wash.rogueautomotiveja.com";
 
+/**
+ * The affiliate/referral code from the current URL (?ref=CODE), if any. A visitor
+ * arrives on this landing page via a partner's link; we forward the code to the
+ * booking app so the discount can be applied at checkout. Without this, clicking
+ * "Book" would drop the code and the affiliate link would never discount.
+ */
+function currentRefCode(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    return new URLSearchParams(window.location.search).get("ref");
+  } catch {
+    return null;
+  }
+}
+
 /** Append UTM params so the booking app can attribute traffic from this site. */
 export function bookingUrl(
   path = "/book-a-detail",
@@ -18,6 +33,11 @@ export function bookingUrl(
     // Pre-select a specific service/tier in the booking flow when provided.
     ...(opts.service ? { service: opts.service } : {}),
   });
+
+  // Carry an affiliate/referral code through to the booking app.
+  const ref = currentRefCode();
+  if (ref) params.set("ref", ref);
+
   return `${BOOKING_APP}${path}?${params.toString()}`;
 }
 
