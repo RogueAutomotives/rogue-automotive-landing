@@ -5,20 +5,39 @@
 
 const BOOKING_APP = "https://wash.rogueautomotiveja.com";
 
+const REF_STORAGE_KEY = "rogue_ref_code";
+
 /**
- * The affiliate/referral code from the current URL (?ref=CODE), if any. A visitor
+ * The affiliate/referral code for this visit (?ref=CODE), if any. A visitor
  * arrives on this landing page via a partner's link; we forward the code to the
- * booking app so the discount can be applied at checkout. Without this, clicking
- * "Book" would drop the code and the affiliate link would never discount.
+ * booking app so the discount can be applied at checkout. Internal SPA
+ * navigation (e.g. home → /car-wash) drops the query string, so the code is
+ * persisted to sessionStorage on first sight and read back from there — a "Book"
+ * click anywhere in the session still carries it.
  */
 function currentRefCode(): string | null {
   if (typeof window === "undefined") return null;
+  let fromUrl: string | null = null;
   try {
-    return new URLSearchParams(window.location.search).get("ref");
+    fromUrl = new URLSearchParams(window.location.search).get("ref");
   } catch {
-    return null;
+    fromUrl = null;
+  }
+  try {
+    if (fromUrl) {
+      window.sessionStorage.setItem(REF_STORAGE_KEY, fromUrl);
+      return fromUrl;
+    }
+    return window.sessionStorage.getItem(REF_STORAGE_KEY);
+  } catch {
+    // storage unavailable/blocked — best effort with the URL value only
+    return fromUrl;
   }
 }
+
+// Capture the ref immediately on module load, while the landing URL still has
+// its query string — before the router or any internal navigation strips it.
+currentRefCode();
 
 /** Append UTM params so the booking app can attribute traffic from this site. */
 export function bookingUrl(
