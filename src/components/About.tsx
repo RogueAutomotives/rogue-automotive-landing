@@ -5,8 +5,8 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation";
  * concrete, checkable numbers. Copy leads with detailing (the headline product).
  */
 const STATS = [
-  { value: "500+", label: "cars detailed" },
-  { value: "5.0 ★", label: "Google rating" },
+  { value: "5.0 ★", label: "across 9 Google reviews" },
+  { value: "3", label: "business lines under one roof" },
   { value: "4", label: "detail packages, Bronze → Platinum" },
   { value: "7 days", label: "open every week" },
 ];
