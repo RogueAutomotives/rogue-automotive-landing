@@ -35,17 +35,22 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 sm:gap-6" ref={gridRef}>
+        {/* Detailing is the headline product — its card gets the wider column and
+            the red "Our specialty" treatment instead of three equal cards. */}
+        <div className="grid md:grid-cols-[1.25fr_1fr_1fr] gap-5 sm:gap-6" ref={gridRef}>
           {BUSINESS_LINES.map((line, index) => {
             const Icon = line.icon;
             const isLive = line.status === "live";
+            const isFeatured = line.key === "wash";
             return (
               <Link
                 key={line.key}
                 to={line.route}
-                className={`group relative flex flex-col rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rogue-red focus-visible:ring-offset-2 ${
-                  isGridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`group relative flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rogue-red focus-visible:ring-offset-2 ${
+                  isFeatured
+                    ? "border-2 border-rogue-red shadow-lg shadow-rogue-red/10"
+                    : "border border-slate-200"
+                } ${isGridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Accent header band (interim visual until real photography) */}
@@ -53,10 +58,12 @@ const Services = () => {
                   <Icon className="h-12 w-12 text-white/90" strokeWidth={1.5} />
                   <span
                     className={`absolute top-3 right-3 text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full ${
-                      isLive ? "bg-rogue-red text-white" : "bg-white/15 text-white backdrop-blur-sm border border-white/25"
+                      isFeatured
+                        ? "bg-rogue-red text-white"
+                        : "bg-white/15 text-white backdrop-blur-sm border border-white/25"
                     }`}
                   >
-                    {STATUS_LABEL[line.status]}
+                    {isFeatured ? "Our specialty" : STATUS_LABEL[line.status]}
                   </span>
                 </div>
 

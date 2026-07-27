@@ -39,7 +39,13 @@ const Testimonials = () => {
                 <div key={i} className="h-48 rounded-2xl bg-slate-100 animate-pulse" />
               ))
             : items.map((t, i) => (
-                <Card key={i} className="border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+                <Card key={i} className="relative border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+                  <span
+                    aria-hidden
+                    className="absolute top-2 right-4 font-montserrat font-extrabold text-5xl leading-none text-red-100 select-none"
+                  >
+                    ”
+                  </span>
                   <CardContent className="p-5 sm:p-6 flex flex-col h-full">
                     <div className="flex mb-3" aria-label={`${t.rating} out of 5 stars`}>
                       {Array.from({ length: 5 }).map((_, s) => (
@@ -49,7 +55,7 @@ const Testimonials = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-rogue-slate italic leading-relaxed flex-grow">“{t.comment}”</p>
+                    <p className="text-rogue-slate leading-relaxed flex-grow">“{t.comment}”</p>
                     <div className="mt-4">
                       <p className="font-montserrat font-semibold text-rogue-charcoal">{t.displayName}</p>
                       {t.serviceName && <p className="text-sm text-rogue-red">{t.serviceName}</p>}

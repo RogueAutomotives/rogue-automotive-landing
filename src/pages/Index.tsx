@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Services from '@/components/Services';
@@ -12,23 +12,23 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Rogue Automotive - Premium Car Wash, Sales & Rentals in Kingston</title>
-        <meta name="description" content="Experience premium car care at Rogue Automotive. Professional car wash services, quality used cars for sale, and flexible car rentals in Kingston, Jamaica. Book your service today!" />
+        <title>Rogue Automotive - Premium Car Detailing, Sales & Rentals in Kingston</title>
+        <meta name="description" content="Dare To Defy. Premium car detailing from express wash to paint correction and PPF, plus quality used cars and flexible rentals in Kingston, Jamaica. Book online in under a minute." />
         <meta name="keywords" content="car wash Kingston, car sales Jamaica, car rentals Kingston, auto detailing, used cars Jamaica, vehicle rental Kingston" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://rogueautomotiveja.com/" />
-        <meta property="og:title" content="Rogue Automotive - Premium Car Wash, Sales & Rentals in Kingston" />
-        <meta property="og:description" content="Experience premium car care at Rogue Automotive. Professional car wash services, quality used cars for sale, and flexible car rentals in Kingston, Jamaica. Book your service today!" />
-        <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        <meta property="og:title" content="Rogue Automotive - Premium Car Detailing, Sales & Rentals in Kingston" />
+        <meta property="og:description" content="Dare To Defy. Premium car detailing from express wash to paint correction and PPF, plus quality used cars and flexible rentals in Kingston, Jamaica. Book online in under a minute." />
+        <meta property="og:image" content="https://rogueautomotiveja.com/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://rogueautomotiveja.com/" />
-        <meta property="twitter:title" content="Rogue Automotive - Premium Car Wash, Sales & Rentals in Kingston" />
-        <meta property="twitter:description" content="Experience premium car care at Rogue Automotive. Professional car wash services, quality used cars for sale, and flexible car rentals in Kingston, Jamaica. Book your service today!" />
-        <meta property="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        <meta property="twitter:title" content="Rogue Automotive - Premium Car Detailing, Sales & Rentals in Kingston" />
+        <meta property="twitter:description" content="Dare To Defy. Premium car detailing from express wash to paint correction and PPF, plus quality used cars and flexible rentals in Kingston, Jamaica. Book online in under a minute." />
+        <meta property="twitter:image" content="https://rogueautomotiveja.com/lovable-uploads/962d3bfb-d1d6-4416-8e25-35bf7d657300.png" />
 
         {/* Additional SEO tags */}
         <meta name="robots" content="index, follow" />
