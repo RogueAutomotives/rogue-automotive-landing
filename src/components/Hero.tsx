@@ -118,11 +118,11 @@ const Hero = () => {
           {/* Proof chips — real, checkable claims under the CTAs */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-rogue-silver/80">
             <span>
-              <strong className="text-white font-montserrat">5.0 ★</strong> on Google
+              <strong className="text-white font-montserrat">5.0 ★</strong> on Google (9 reviews)
             </span>
             <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-rogue-slate" />
             <span>
-              <strong className="text-white font-montserrat">500+</strong> cars detailed
+              Open <strong className="text-white font-montserrat">7 days</strong> a week
             </span>
             <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-rogue-slate" />
             <span>
