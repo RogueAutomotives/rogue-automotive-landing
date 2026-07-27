@@ -84,38 +84,50 @@ const Hero = () => {
           <p className="text-rogue-red font-montserrat font-semibold tracking-[0.2em] text-xs sm:text-sm uppercase mb-5 animate-fade-in">
             Rogue Automotive · Kingston, Jamaica
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-bold text-white mb-5 sm:mb-6 leading-[1.05]">
-            Drive Clean.
-            <br />
-            Drive Bold.
-            <br />
-            <span className="text-rogue-silver">Drive Rogue.</span>
+          {/* The real brand slogan — not a marketing invention. */}
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-montserrat font-extrabold uppercase text-white mb-5 sm:mb-6 leading-[1.04]">
+            Dare To <span className="text-rogue-red">Defy.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-rogue-silver/90 mb-8 max-w-xl leading-relaxed">
-            One home for your car in Kingston — premium <strong className="text-white font-semibold">wash &amp; detailing</strong>,
-            quality <strong className="text-white font-semibold">sales</strong>, and flexible{" "}
-            <strong className="text-white font-semibold">rentals</strong>.
+            Kingston's home for <strong className="text-white font-semibold">premium detailing</strong> — plus
+            quality <strong className="text-white font-semibold">sales</strong> and flexible{" "}
+            <strong className="text-white font-semibold">rentals</strong>, all in one place.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Button
-              size="lg"
-              onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-rogue-red hover:bg-rogue-red-dark text-white border-0 px-7 py-6 text-base font-montserrat font-semibold rounded-full transition-all duration-300 hover:scale-[1.03] group"
-            >
-              Explore our services
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
             <a href={bookingUrl("/book-a-detail", { content: "hero" })} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
-                variant="outline"
-                className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border-white/30 px-7 py-6 text-base font-montserrat font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
+                className="w-full sm:w-auto bg-rogue-red hover:bg-rogue-red-dark text-white border-0 px-7 py-6 text-base font-montserrat font-semibold rounded-full transition-all duration-300 hover:scale-[1.03] group shadow-lg shadow-rogue-red/30"
               >
                 Book a Detail
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </a>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-white/5 hover:bg-white/10 text-white border-white/30 px-7 py-6 text-base font-montserrat font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
+            >
+              Explore our services
+            </Button>
+          </div>
+
+          {/* Proof chips — real, checkable claims under the CTAs */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-rogue-silver/80">
+            <span>
+              <strong className="text-white font-montserrat">5.0 ★</strong> on Google
+            </span>
+            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-rogue-slate" />
+            <span>
+              <strong className="text-white font-montserrat">500+</strong> cars detailed
+            </span>
+            <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-rogue-slate" />
+            <span>
+              <strong className="text-white font-montserrat">17 Westminster Rd</strong>, Kingston 10
+            </span>
           </div>
         </div>
       </div>
