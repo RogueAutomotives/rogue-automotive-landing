@@ -169,13 +169,6 @@ interface SpecialistService {
 
 const SPECIALIST_SERVICES: SpecialistService[] = [
   {
-    slug: "ceramic",
-    name: "Ceramic Coating",
-    icon: Gem,
-    blurb: "A durable liquid-glass layer that locks in gloss and makes washing effortless for years.",
-    points: ["Years of paint protection", "Deep, glass-like gloss", "Hydrophobic — water & dirt slide off", "UV & chemical resistance"],
-  },
-  {
     slug: "paint-correction",
     name: "Paint Correction",
     icon: Wand2,
@@ -192,6 +185,117 @@ const SPECIALIST_SERVICES: SpecialistService[] = [
     comingSoon: true,
   },
 ];
+
+// Ceramic protection ladder — mirrors the live booking catalog exactly.
+// Tier 1 books at a fixed price; the real coatings are quoted after inspection.
+interface CeramicTier {
+  name: string;
+  duration: string;
+  price: string;
+  priceNote: string;
+  blurb: string;
+  points: string[];
+  featured?: boolean;
+  bookingContent: string;
+}
+
+const CERAMIC_TIERS: CeramicTier[] = [
+  {
+    name: "Ceramic Spray Sealant",
+    duration: "6–12 weeks",
+    price: "J$18,000",
+    priceNote: "fixed price — book online",
+    blurb: "Entry ceramic protection. The perfect gloss top-up between details.",
+    points: ["Full decontamination wash", "Clay-bar treatment", "Hydrophobic spray sealant", "~2 hours"],
+    bookingContent: "ceramic-spray-sealant",
+  },
+  {
+    name: "Ceramic Coating",
+    duration: "9–12 months",
+    price: "From J$45,000",
+    priceNote: "quoted after free inspection",
+    blurb: "Serious protection for daily drivers — a true single-layer ceramic coating.",
+    points: ["Clay-bar decontamination", "Machine prep + IPA wipe-down", "Single-layer ceramic coating", "UV resistance · ~4 hours"],
+    featured: true,
+    bookingContent: "ceramic-12-month",
+  },
+  {
+    name: "Ceramic Coating Pro",
+    duration: "2–3 years",
+    price: "From J$85,000",
+    priceNote: "quoted after free inspection",
+    blurb: "Our flagship: true 9H-rated, two-layer ceramic. Warrantied.",
+    points: ["Clay-bar decontamination", "Paint-correction prep", "Two-layer 9H ceramic", "Warrantied · ~6 hours"],
+    bookingContent: "ceramic-pro",
+  },
+];
+
+const CeramicTiers = () => (
+  <section className="py-16 sm:py-20 bg-white">
+    <div className="container mx-auto px-4 sm:px-6">
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <p className="text-rogue-red font-montserrat font-semibold tracking-[0.2em] text-xs uppercase mb-3">
+          Ceramic protection
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-montserrat font-bold text-rogue-charcoal">
+          Pick your protection window
+        </h2>
+        <p className="text-base text-rogue-slate mt-3 leading-relaxed">
+          Every tier includes clay-bar decontamination, so the ceramic bonds to clean paint —
+          the difference is how long the protection lasts.
+        </p>
+      </div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+        {CERAMIC_TIERS.map((tier) => (
+          <div
+            key={tier.name}
+            className={`relative flex flex-col rounded-2xl p-6 border transition-all duration-300 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 ${
+              tier.featured ? "border-2 border-rogue-red" : "border-slate-200"
+            }`}
+          >
+            {tier.featured && (
+              <span className="absolute top-4 right-4 text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-rogue-red text-white">
+                Most popular
+              </span>
+            )}
+            <p className="font-montserrat font-semibold text-xs uppercase tracking-[0.15em] text-rogue-red mb-1">
+              {tier.duration}
+            </p>
+            <h3 className="text-xl font-montserrat font-bold text-rogue-charcoal mb-1">{tier.name}</h3>
+            <p className="text-sm text-rogue-slate mb-4 leading-relaxed">{tier.blurb}</p>
+            <p className="font-montserrat font-bold text-2xl text-rogue-charcoal">{tier.price}</p>
+            <p className="text-xs text-rogue-slate mb-4">{tier.priceNote}</p>
+            <ul className="space-y-1.5 mb-6">
+              {tier.points.map((pt) => (
+                <li key={pt} className="flex items-start text-sm text-rogue-slate">
+                  <Check className="h-4 w-4 text-rogue-red mr-2 mt-0.5 flex-shrink-0" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: tier.bookingContent })}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto"
+            >
+              <Button
+                className={`w-full rounded-full font-montserrat font-semibold text-white ${
+                  tier.featured
+                    ? "bg-rogue-red hover:bg-rogue-red-dark"
+                    : "bg-rogue-charcoal hover:bg-rogue-dark"
+                }`}
+              >
+                {tier.priceNote.startsWith("fixed") ? "Book now" : "Request a quote"}
+              </Button>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 const SpecialistServices = () => (
   <section className="py-16 sm:py-20 bg-slate-50">
@@ -312,7 +416,10 @@ const CarWash = () => (
       {/* Packages (live from the catalog) */}
       <PackagesSection />
 
-      {/* Quote-based premium services: ceramic, paint correction, PPF */}
+      {/* Ceramic protection ladder — three duration tiers, clay decontamination in all */}
+      <CeramicTiers />
+
+      {/* Quote-based premium services: paint correction, PPF */}
       <SpecialistServices />
 
       {/* App features showcase — booking, loyalty, saved vehicles, pay, vouchers */}

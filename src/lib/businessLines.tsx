@@ -21,8 +21,8 @@ export const BUSINESS_LINES: BusinessLine[] = [
     name: "Wash & Detailing",
     tagline: "Showroom-clean, every time",
     blurb:
-      "From an express wash to full interior + exterior detailing, paint correction and PPF — booked online in under a minute.",
-    features: ["Wash & vac", "Interior & exterior detailing", "Paint correction & PPF", "Subscriptions"],
+      "From an express wash to full interior + exterior detailing, ceramic coating, paint correction and PPF — booked online in under a minute.",
+    features: ["Wash & vac", "Interior & exterior detailing", "Ceramic coating — 3 tiers", "Paint correction & PPF"],
     status: "live",
     route: "/car-wash",
     icon: Sparkles,
