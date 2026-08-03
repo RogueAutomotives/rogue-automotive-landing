@@ -58,7 +58,11 @@ const AmbientLightSpotlight = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-3">
             <a
-              href={bookingUrl("/book-a-detail", { campaign: "home", content: "ambient-light-spotlight" })}
+              href={bookingUrl("/book-a-detail", {
+                campaign: "home",
+                content: "ambient-light-spotlight",
+                service: "ambient-light-installation",
+              })}
               target="_blank"
               rel="noopener noreferrer"
             >

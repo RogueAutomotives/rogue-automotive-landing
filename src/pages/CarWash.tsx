@@ -165,11 +165,14 @@ interface SpecialistService {
   blurb: string;
   points: string[];
   comingSoon?: boolean;
+  /** Name-slug of the catalog service — the booking app prefix-matches it to preselect. */
+  serviceSlug?: string;
 }
 
 const SPECIALIST_SERVICES: SpecialistService[] = [
   {
     slug: "paint-correction",
+    serviceSlug: "two-step-paint-correction",
     name: "Paint Correction",
     icon: Wand2,
     blurb: "Multi-stage machine polishing that removes swirls, scratches and oxidation for a flawless finish.",
@@ -177,6 +180,7 @@ const SPECIALIST_SERVICES: SpecialistService[] = [
   },
   {
     slug: "ambient-lighting",
+    serviceSlug: "ambient-light-installation",
     name: "Ambient Light Installation",
     icon: Lightbulb,
     blurb: "Multi-zone LED ambient lighting for your cabin — dash, doors, footwells and console, colour-controlled from your phone.",
@@ -204,6 +208,8 @@ interface CeramicTier {
   points: string[];
   featured?: boolean;
   bookingContent: string;
+  /** Name-slug of the catalog service — the booking app prefix-matches it to preselect. */
+  serviceSlug: string;
 }
 
 const CERAMIC_TIERS: CeramicTier[] = [
@@ -215,6 +221,7 @@ const CERAMIC_TIERS: CeramicTier[] = [
     blurb: "Entry ceramic protection. The perfect gloss top-up between details.",
     points: ["Full decontamination wash", "Clay-bar treatment", "Hydrophobic spray sealant", "~2 hours"],
     bookingContent: "ceramic-spray-sealant",
+    serviceSlug: "ceramic-spray-sealant",
   },
   {
     name: "Ceramic Coating",
@@ -225,6 +232,7 @@ const CERAMIC_TIERS: CeramicTier[] = [
     points: ["Clay-bar decontamination", "Machine prep + IPA wipe-down", "Single-layer ceramic coating", "UV resistance · ~4 hours"],
     featured: true,
     bookingContent: "ceramic-12-month",
+    serviceSlug: "ceramic-coating-9-12",
   },
   {
     name: "Ceramic Coating Pro",
@@ -234,6 +242,7 @@ const CERAMIC_TIERS: CeramicTier[] = [
     blurb: "Our flagship: true 9H-rated, two-layer ceramic. Warrantied.",
     points: ["Clay-bar decontamination", "Paint-correction prep", "Two-layer 9H ceramic", "Warrantied · ~6 hours"],
     bookingContent: "ceramic-pro",
+    serviceSlug: "ceramic-coating-pro",
   },
 ];
 
@@ -282,7 +291,11 @@ const CeramicTiers = () => (
               ))}
             </ul>
             <a
-              href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: tier.bookingContent })}
+              href={bookingUrl("/book-a-detail", {
+                campaign: "car-wash",
+                content: tier.bookingContent,
+                service: tier.serviceSlug,
+              })}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-auto"
@@ -356,7 +369,11 @@ const SpecialistServices = () => (
                 </div>
               ) : (
                 <a
-                  href={bookingUrl("/book-a-detail", { campaign: "car-wash", content: `specialist-${service.slug}` })}
+                  href={bookingUrl("/book-a-detail", {
+                    campaign: "car-wash",
+                    content: `specialist-${service.slug}`,
+                    service: service.serviceSlug,
+                  })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-auto"
