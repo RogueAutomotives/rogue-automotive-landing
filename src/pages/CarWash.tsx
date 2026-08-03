@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { Check, ArrowRight, Sparkles, MessageCircle, Gem, Wand2, ShieldCheck } from "lucide-react";
+import { Check, ArrowRight, Sparkles, MessageCircle, Gem, Wand2, ShieldCheck, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SubPageNav from "@/components/SubPageNav";
 import Footer from "@/components/Footer";
@@ -174,6 +174,13 @@ const SPECIALIST_SERVICES: SpecialistService[] = [
     icon: Wand2,
     blurb: "Multi-stage machine polishing that removes swirls, scratches and oxidation for a flawless finish.",
     points: ["Removes swirls & light scratches", "Restores depth and clarity", "Ideal prep before ceramic", "Showroom-level gloss"],
+  },
+  {
+    slug: "ambient-lighting",
+    name: "Ambient Light Installation",
+    icon: Lightbulb,
+    blurb: "Multi-zone LED ambient lighting for your cabin — dash, doors, footwells and console, colour-controlled from your phone.",
+    points: ["Multi-zone LED coverage", "App / remote colour control", "Hidden, OEM-look wiring", "From J$30,000 · ~1.5 hours"],
   },
   {
     slug: "ppf",
