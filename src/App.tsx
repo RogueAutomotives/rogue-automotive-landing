@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import CarWash from "./pages/CarWash";
 import CarSales from "./pages/CarSales";
 import CarRentals from "./pages/CarRentals";
+import RentalDetail from "./pages/RentalDetail";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/car-wash" element={<CarWash />} />
             <Route path="/car-sales" element={<CarSales />} />
             <Route path="/car-rentals" element={<CarRentals />} />
+            <Route path="/car-rentals/:slug" element={<RentalDetail />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
