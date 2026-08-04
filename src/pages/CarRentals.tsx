@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Check, Key, Car, MessageCircle, Phone, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Check, Key, Car, MessageCircle, Phone, CheckCircle2, Loader2, AlertCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,36 +12,7 @@ import Footer from "@/components/Footer";
 import { sendContactMessage } from "@/lib/contact";
 import { whatsappUrl, CONTACT } from "@/lib/links";
 
-interface RentalCar {
-  name: string;
-  type: string;
-  pricePerDay: number;
-  /** Photo in public/lovable-uploads/. Falls back to an on-brand tile until the file exists. */
-  image: string;
-  blurb: string;
-  points: string[];
-}
-
-// Drop the real vehicle photos into public/lovable-uploads/ with these names and
-// they appear automatically (landscape, ~4:3 works best).
-const FLEET: RentalCar[] = [
-  {
-    name: "Honda Odyssey",
-    type: "Minivan",
-    pricePerDay: 10000,
-    image: "/lovable-uploads/rental-honda-odyssey.jpg",
-    blurb: "Room for the whole crew — airport runs, family trips and group outings in comfort.",
-    points: ["Seats up to 7", "Automatic transmission", "Cold A/C throughout", "Generous luggage space"],
-  },
-  {
-    name: "Nissan Teana",
-    type: "Sedan",
-    pricePerDay: 9000,
-    image: "/lovable-uploads/rental-nissan-teana.jpg",
-    blurb: "A smooth, executive-class sedan for business trips and everyday driving.",
-    points: ["Seats 5", "Automatic transmission", "Cold A/C", "Comfortable highway cruiser"],
-  },
-];
+import { FLEET, formatJmd } from "@/lib/rentalFleet";
 
 /** Vehicle photo with an on-brand fallback tile shown until the real image is uploaded. */
 function CarPhoto({ src, alt }: { src: string; alt: string }) {
@@ -68,8 +40,6 @@ function CarPhoto({ src, alt }: { src: string; alt: string }) {
     />
   );
 }
-
-const formatJmd = (n: number) => `J$${n.toLocaleString()}`;
 
 /** Whole days between two yyyy-mm-dd dates (same-day rental counts as 1). */
 function rentalDays(pickup: string, ret: string): number {
@@ -323,6 +293,23 @@ const BookingRequestForm = ({
 const CarRentals = () => {
   const [selectedCar, setSelectedCar] = useState("");
   const formRef = useRef<HTMLDivElement>(null);
+  const [searchParams] = useSearchParams();
+
+  // A PDP's "Request this car" arrives as /car-rentals?car=<slug>#booking-request —
+  // pre-select that car in the form (the hash scrolls the section natively).
+  useEffect(() => {
+    const slug = searchParams.get("car");
+    if (slug) {
+      const car = FLEET.find((c) => c.slug === slug);
+      if (car) {
+        setSelectedCar(car.name);
+        // react-router doesn't scroll to the hash on SPA navigations — do it
+        // after layout so the visitor lands on the form with the car selected.
+        setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const requestCar = (name: string) => {
     setSelectedCar(name);
@@ -335,7 +322,7 @@ const CarRentals = () => {
         <title>Car Rentals — Rogue Automotive Jamaica | Daily Rates</title>
         <meta
           name="description"
-          content="Rent a Honda Odyssey or Nissan Teana in Kingston, Jamaica from J$9,000 per day. Insurance included — send a booking request online with Rogue Automotive."
+          content="Rent a Honda Odyssey, Fit Shuttle, Accord, Nissan Teana or BMW 328i GT in Kingston, Jamaica from J$9,000 per day. Insurance included — send a booking request online with Rogue Automotive."
         />
         <link rel="canonical" href="https://www.rogueautomotiveja.com/car-rentals" />
       </Helmet>
@@ -388,13 +375,15 @@ const CarRentals = () => {
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
               {FLEET.map((car) => (
                 <div
-                  key={car.name}
+                  key={car.slug}
                   className="relative flex flex-col rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
-                  <CarPhoto src={car.image} alt={`${car.name} — available for rental`} />
+                  <Link to={`/car-rentals/${car.slug}`} aria-label={`View ${car.name} details`}>
+                    <CarPhoto src={car.images[0] ?? ""} alt={`${car.name} — available for rental`} />
+                  </Link>
                   <span className="self-start text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-rogue-light text-rogue-charcoal mb-3">
                     {car.type}
                   </span>
@@ -412,12 +401,23 @@ const CarRentals = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    onClick={() => requestCar(car.name)}
-                    className="mt-auto w-full rounded-full font-montserrat font-semibold bg-rogue-charcoal hover:bg-rogue-dark text-white"
-                  >
-                    Request this car
-                  </Button>
+                  <div className="mt-auto space-y-2">
+                    <Link to={`/car-rentals/${car.slug}`} className="block">
+                      <Button
+                        variant="outline"
+                        className="w-full rounded-full font-montserrat font-semibold border-slate-300"
+                      >
+                        View details & photos
+                        <ArrowRight className="ml-1.5 h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <Button
+                      onClick={() => requestCar(car.name)}
+                      className="w-full rounded-full font-montserrat font-semibold bg-rogue-charcoal hover:bg-rogue-dark text-white"
+                    >
+                      Request this car
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
