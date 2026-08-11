@@ -21,7 +21,7 @@ function CarPhoto({ src, alt }: { src: string; alt: string }) {
   if (failed) {
     return (
       <div
-        className="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex items-center justify-center mb-4"
+        className="aspect-[3/4] w-full rounded-xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex items-center justify-center mb-4"
         role="img"
         aria-label={alt}
       >
@@ -36,7 +36,7 @@ function CarPhoto({ src, alt }: { src: string; alt: string }) {
       alt={alt}
       loading="lazy"
       onError={() => setFailed(true)}
-      className="aspect-[4/3] w-full object-cover rounded-xl mb-4"
+      className="aspect-[3/4] w-full object-cover rounded-xl mb-4"
     />
   );
 }
