@@ -52,11 +52,12 @@ const RentalDetail = () => {
                 <img
                   src={mainImage}
                   alt={`${car.name} — photo ${activeImage + 1}`}
-                  className="w-full aspect-[4/3] object-cover rounded-2xl border border-slate-200"
+                  fetchPriority="high"
+                  className="w-full aspect-[3/4] object-cover rounded-2xl border border-slate-200 bg-rogue-light"
                 />
               ) : (
                 <div
-                  className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex flex-col items-center justify-center"
+                  className="w-full aspect-[3/4] rounded-2xl bg-gradient-to-br from-rogue-charcoal to-rogue-dark flex flex-col items-center justify-center"
                   role="img"
                   aria-label={car.name}
                 >
