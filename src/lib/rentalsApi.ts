@@ -48,7 +48,18 @@ export interface RentalPayPage {
   fullPaymentSecurityDeposit: number;
   /** What paying everything now saves on the security deposit (0 when ineligible). */
   fullPaymentSavings: number;
+  /** True when a cancellation request is pending staff review. */
+  cancellationRequested: boolean;
   isExpired: boolean;
+}
+
+export interface RequestCancellationResult {
+  isSuccess: boolean;
+  errorMessage?: string;
+  /** True when the booking was cancelled outright (nothing was paid). */
+  cancelledImmediately: boolean;
+  refundEstimate: number;
+  policyDescription?: string;
 }
 
 export interface CreateRentalBookingRequest {
@@ -128,6 +139,12 @@ export const createRentalPayment = (token: string, option: "Deposit50" | "FullWi
     method: "POST",
     body: JSON.stringify({ token, option }),
   });
+
+export const requestRentalCancellation = (token: string, reason?: string) =>
+  request<RequestCancellationResult>(
+    `/rentals/pay/${encodeURIComponent(token)}/request-cancellation`,
+    { method: "POST", body: JSON.stringify({ reason }) }
+  );
 
 export const confirmRentalPayment = (paymentIntentId: string) =>
   request<ConfirmRentalPaymentResult>(
