@@ -195,6 +195,10 @@ export default function RentalBookingPanel({ slug }: Props) {
                     </span>
                     <span className="font-semibold text-rogue-charcoal">{formatJmd(car!.securityDeposit)}</span>
                   </div>
+                  <p className="text-xs text-rogue-red font-medium pt-1">
+                    💡 Pay everything up front at checkout and save 20% on the security deposit
+                    (−{formatJmd(car!.securityDeposit * 0.2)}).
+                  </p>
                 </div>
               ) : rangeCrossesBlocked ? (
                 <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 mb-4 text-sm text-amber-800">
