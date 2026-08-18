@@ -5,6 +5,7 @@ import { ArrowLeft, Car, Check, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SubPageNav from "@/components/SubPageNav";
 import Footer from "@/components/Footer";
+import RentalBookingPanel from "@/components/RentalBookingPanel";
 import { whatsappUrl } from "@/lib/links";
 import { findRental, formatJmd } from "@/lib/rentalFleet";
 
@@ -143,6 +144,12 @@ const RentalDetail = () => {
                 rates available.
               </p>
             </div>
+          </div>
+
+          {/* Self-serve online booking: calendar + deposit checkout. Hidden
+              automatically if the rentals API is unreachable. */}
+          <div className="max-w-6xl mx-auto">
+            <RentalBookingPanel slug={car.slug} />
           </div>
         </div>
 

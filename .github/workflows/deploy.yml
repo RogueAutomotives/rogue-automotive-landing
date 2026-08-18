@@ -29,6 +29,8 @@ jobs:
         run: npm ci
 
       - name: Build for Production
+        # Stripe publishable key comes from the committed .env.production
+        # (client-safe by design; Vite inlines it at build time).
         run: |
           npm run build
           echo "www.rogueautomotiveja.com" > dist/CNAME
