@@ -210,26 +210,31 @@ const RentalPay = () => {
             </p>
 
             <div className="space-y-3 mb-5">
-              {canPayDeposit && (
-                <OptionButton
-                  active={option === "Deposit50"}
-                  title={`Pay 50% deposit — ${formatJmd(page.pricing.depositDue)}`}
-                  subtitle={`Locks your dates now. Remainder + ${formatJmd(page.pricing.securityDeposit)} security deposit due at pickup.`}
-                  onClick={() => startPayment("Deposit50")}
-                  disabled={creatingIntent}
-                />
-              )}
+              {/* Full payment first — the featured option (20% off the security deposit) */}
               <OptionButton
                 active={option === "FullWithSecurity"}
+                badge={canPayDeposit ? "Most popular" : undefined}
                 title={`Pay everything — ${formatJmd(page.balanceWithSecurity)}`}
                 subtitle={
                   page.paymentState === "DepositPaid"
                     ? "Clears your remaining balance including the refundable security deposit."
-                    : "Rental total + refundable security deposit. Nothing more to pay at pickup."
+                    : page.fullPaymentSavings > 0
+                      ? `Save ${formatJmd(page.fullPaymentSavings)} — 20% off the refundable security deposit (${formatJmd(page.fullPaymentSecurityDeposit)} instead of ${formatJmd(page.pricing.securityDeposit)}). Nothing more to pay at pickup.`
+                      : "Rental total + refundable security deposit. Nothing more to pay at pickup."
                 }
                 onClick={() => startPayment("FullWithSecurity")}
                 disabled={creatingIntent}
               />
+              {canPayDeposit && (
+                <OptionButton
+                  active={option === "Deposit50"}
+                  title={`Pay 50% deposit — ${formatJmd(page.pricing.depositDue)}`}
+                  subtitle={`Locks your dates now. Remainder + ${formatJmd(page.pricing.securityDeposit)} full security deposit due at pickup.`}
+                  onClick={() => startPayment("Deposit50")}
+                  disabled={creatingIntent}
+                  muted
+                />
+              )}
             </div>
 
             {creatingIntent && (
@@ -298,24 +303,35 @@ function OptionButton({
   subtitle,
   onClick,
   disabled,
+  badge,
+  muted,
 }: {
   active: boolean;
   title: string;
   subtitle: string;
   onClick: () => void;
   disabled?: boolean;
+  badge?: string;
+  muted?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`w-full text-left rounded-xl border-2 p-4 transition-all disabled:opacity-60 ${
+      className={`relative w-full text-left rounded-xl border-2 p-4 transition-all disabled:opacity-60 ${
         active
           ? "border-rogue-red bg-red-50"
-          : "border-slate-200 bg-white hover:border-slate-300"
-      }`}
+          : badge
+            ? "border-rogue-red/50 bg-white hover:border-rogue-red"
+            : "border-slate-200 bg-white hover:border-slate-300"
+      } ${muted && !active ? "opacity-90" : ""}`}
     >
+      {badge && (
+        <span className="absolute -top-2.5 left-4 text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2.5 py-0.5 rounded-full bg-rogue-red text-white">
+          {badge}
+        </span>
+      )}
       <p className="font-montserrat font-semibold text-rogue-charcoal">{title}</p>
       <p className="text-sm text-rogue-slate mt-0.5">{subtitle}</p>
     </button>

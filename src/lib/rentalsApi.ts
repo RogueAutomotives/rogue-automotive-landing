@@ -44,6 +44,10 @@ export interface RentalPayPage {
   status: string;
   amountPaidOnline: number;
   balanceWithSecurity: number;
+  /** Security deposit when paying 100% up front (20% incentive off; full amount once anything is paid). */
+  fullPaymentSecurityDeposit: number;
+  /** What paying everything now saves on the security deposit (0 when ineligible). */
+  fullPaymentSavings: number;
   isExpired: boolean;
 }
 
