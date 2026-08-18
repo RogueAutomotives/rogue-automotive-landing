@@ -30,11 +30,21 @@ import {
   createRentalPayment,
   formatJmd,
   getRentalPayPage,
+  requestRentalCancellation,
   type ConfirmRentalPaymentResult,
   type RentalPayPage,
+  type RequestCancellationResult,
 } from "@/lib/rentalsApi";
 
 type PayOption = "Deposit50" | "FullWithSecurity";
+
+/** One-line policy summary for the cancel confirm dialog. */
+const cancelPolicyLine = (page: RentalPayPage) => {
+  const hoursUntil = (new Date(page.startDate).getTime() - Date.now()) / 3600000;
+  return hoursUntil >= 48
+    ? "You're outside 48 hours of pickup, so everything paid is refunded in full."
+    : "You're inside 48 hours of pickup, so one day's rate is retained per the cancellation policy (security deposits always refund in full).";
+};
 
 const fmtDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, {
@@ -55,6 +65,29 @@ const RentalPay = () => {
   const [creatingIntent, setCreatingIntent] = useState(false);
   const [intentError, setIntentError] = useState("");
   const [outcome, setOutcome] = useState<ConfirmRentalPaymentResult | null>(null);
+  const [cancelOutcome, setCancelOutcome] = useState<RequestCancellationResult | null>(null);
+  const [cancelling, setCancelling] = useState(false);
+  const [cancelError, setCancelError] = useState("");
+
+  const requestCancel = async () => {
+    if (!token || !page) return;
+    const confirmed = window.confirm(
+      page.paymentState === "Unpaid"
+        ? "Cancel this booking? Since nothing has been paid, it will be cancelled immediately."
+        : `Request cancellation? ${cancelPolicyLine(page)} Our team will confirm and process any refund.`
+    );
+    if (!confirmed) return;
+    setCancelling(true);
+    setCancelError("");
+    try {
+      const result = await requestRentalCancellation(token);
+      setCancelOutcome(result);
+    } catch (err) {
+      setCancelError(err instanceof Error ? err.message : "Could not process the cancellation.");
+    } finally {
+      setCancelling(false);
+    }
+  };
 
   useEffect(() => {
     if (!token) return;
@@ -123,6 +156,30 @@ const RentalPay = () => {
           icon={<XCircle className="h-14 w-14 text-rogue-red" />}
           title="Those dates were just taken"
           body={`Another customer completed payment for the ${page.carName} over the same dates moments before you. ${outcome.refunded ? "Your payment has been fully refunded — card refunds typically take 5–10 business days." : "Your payment is being refunded."} Message us and we'll find you new dates or another car.`}
+        />
+      );
+    }
+
+    if (cancelOutcome) {
+      return (
+        <StatusCard
+          icon={<CheckCircle2 className="h-14 w-14 text-green-500" />}
+          title={cancelOutcome.cancelledImmediately ? "Booking cancelled" : "Cancellation request received"}
+          body={
+            cancelOutcome.cancelledImmediately
+              ? "Your booking has been cancelled — nothing was charged. We'd love to get you on the road another time."
+              : `We've received your cancellation request and our team will confirm it shortly. ${cancelOutcome.policyDescription ?? ""} ${cancelOutcome.refundEstimate > 0 ? `Estimated refund: ${formatJmd(cancelOutcome.refundEstimate)} — issued to your card once confirmed.` : ""}`
+          }
+        />
+      );
+    }
+
+    if (page.cancellationRequested) {
+      return (
+        <StatusCard
+          icon={<Loader2 className="h-14 w-14 text-rogue-red" />}
+          title="Cancellation being processed"
+          body="A cancellation request for this booking is with our team. You'll receive an email once it's confirmed, including any refund details."
         />
       );
     }
@@ -257,7 +314,13 @@ const RentalPay = () => {
               />
             )}
 
-            <div className="border-t border-slate-100 mt-6 pt-4">
+            <p className="text-xs text-rogue-slate mt-4">
+              Cancellation policy: free cancellation up to 48 hours before pickup (full refund).
+              Inside 48 hours, one day's rate applies; after the pickup day the booking deposit is
+              forfeited. Security deposits are always refunded in full.
+            </p>
+
+            <div className="border-t border-slate-100 mt-6 pt-4 flex flex-col gap-2">
               <a
                 href={whatsappUrl(`Hi Rogue Automotive — I have a question about my ${page.carName} rental booking.`)}
                 target="_blank"
@@ -266,6 +329,20 @@ const RentalPay = () => {
               >
                 <MessageCircle className="h-4 w-4 mr-1.5" /> Questions? Chat with us on WhatsApp
               </a>
+              <button
+                type="button"
+                onClick={requestCancel}
+                disabled={cancelling}
+                className="inline-flex items-center text-sm text-rogue-slate hover:text-rogue-red transition-colors disabled:opacity-60 self-start"
+              >
+                <XCircle className="h-4 w-4 mr-1.5" />
+                {cancelling ? "Processing…" : "Need to cancel this booking?"}
+              </button>
+              {cancelError && (
+                <p className="text-sm text-rogue-red" role="alert">
+                  {cancelError}
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>
