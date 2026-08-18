@@ -120,11 +120,14 @@ const RentalDetail = () => {
               </ul>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link to={`/car-rentals?car=${car.slug}#booking-request`} className="flex-1">
-                  <Button className="w-full bg-rogue-red hover:bg-rogue-red-dark text-white font-montserrat font-semibold py-6 rounded-full">
-                    Request this car
-                  </Button>
-                </Link>
+                <Button
+                  onClick={() =>
+                    document.getElementById("book-online")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                  className="flex-1 bg-rogue-red hover:bg-rogue-red-dark text-white font-montserrat font-semibold py-6 rounded-full"
+                >
+                  Book now
+                </Button>
                 <a
                   href={whatsappUrl(`Hi Rogue Automotive — I'd like to rent the ${car.name}.`)}
                   target="_blank"
@@ -140,15 +143,15 @@ const RentalDetail = () => {
                 </a>
               </div>
               <p className="text-xs text-rogue-slate mt-3">
-                Requests are confirmed by phone or email before anything is charged. Weekly and long-term
-                rates available.
+                Lock in your dates below with a 50% deposit — or pay everything up front. Weekly and
+                long-term rates available on WhatsApp.
               </p>
             </div>
           </div>
 
           {/* Self-serve online booking: calendar + deposit checkout. Hidden
               automatically if the rentals API is unreachable. */}
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto scroll-mt-24" id="book-online">
             <RentalBookingPanel slug={car.slug} />
           </div>
         </div>
