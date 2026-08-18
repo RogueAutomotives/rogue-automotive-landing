@@ -26,9 +26,9 @@ interface Props {
   slug: string;
 }
 
-/** Whole days, inclusive of the last rental day (Fri→Fri = 1). */
+/** Rental days as 24-hour periods (nights): pickup Fri, return Sat = 1 day; same-day = 1. */
 const rangeDays = (r: DateRange) =>
-  r.from && r.to ? Math.round((r.to.getTime() - r.from.getTime()) / 86400000) + 1 : 0;
+  r.from && r.to ? Math.max(1, Math.round((r.to.getTime() - r.from.getTime()) / 86400000)) : 0;
 
 const toYmd = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -69,16 +69,24 @@ export default function RentalBookingPanel({ slug }: Props) {
     [blocked]
   );
 
+  // A single selected date = same-day pickup & return (1-day minimum), so the
+  // customer doesn't need to click the same date twice.
+  const sel: DateRange | undefined = range?.from
+    ? { from: range.from, to: range.to ?? range.from }
+    : undefined;
+
   /** Reject ranges that span a blocked booking (endpoints are free but middle isn't). */
   const rangeCrossesBlocked = useMemo(() => {
-    if (!range?.from || !range?.to) return false;
+    if (!sel?.from || !sel?.to) return false;
     return blocked.some(
-      (b) => new Date(b.start) <= range.to! && new Date(b.end) >= range.from!
+      (b) => new Date(b.start) <= sel.to! && new Date(b.end) >= sel.from!
     );
-  }, [range, blocked]);
+  }, [sel, blocked]);
 
-  const days = range ? rangeDays(range) : 0;
+  const days = sel ? rangeDays(sel) : 0;
   const subtotal = car && days > 0 ? car.pricePerDay * days : 0;
+  const minDays = car?.minRentalDays ?? 1;
+  const belowMinimum = days > 0 && days < minDays;
 
   const set = (k: keyof typeof form) => (v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -86,7 +94,7 @@ export default function RentalBookingPanel({ slug }: Props) {
   };
 
   const submit = async () => {
-    if (!car || !range?.from || !range?.to) return;
+    if (!car || !sel?.from || !sel?.to) return;
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
     if (!form.email.trim()) e.email = "Please enter your email.";
@@ -102,8 +110,8 @@ export default function RentalBookingPanel({ slug }: Props) {
       const [firstName, ...rest] = form.name.trim().split(/\s+/);
       const result = await createRentalBooking({
         carSlug: car.slug,
-        startDate: toYmd(range.from),
-        endDate: toYmd(range.to),
+        startDate: toYmd(sel.from),
+        endDate: toYmd(sel.to),
         firstName,
         lastName: rest.join(" "),
         email: form.email.trim(),
@@ -157,12 +165,18 @@ export default function RentalBookingPanel({ slug }: Props) {
             </div>
 
             <div>
-              {range?.from && range?.to && !rangeCrossesBlocked ? (
+              {belowMinimum && !rangeCrossesBlocked ? (
+                <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 mb-4 text-sm text-amber-800">
+                  <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  Minimum rental for this car is {minDays} days — extend your return date.
+                </div>
+              ) : sel?.from && sel?.to && !rangeCrossesBlocked ? (
                 <div className="rounded-xl bg-rogue-light p-4 mb-4 space-y-1.5 text-sm">
                   <p className="flex items-center gap-2 text-rogue-charcoal font-medium">
                     <CalendarDays className="h-4 w-4 text-rogue-red" />
-                    {range.from.toLocaleDateString(undefined, { month: "short", day: "numeric" })} –{" "}
-                    {range.to.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}{" "}
+                    {sel.from.getTime() === sel.to.getTime()
+                      ? `${sel.from.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })} (same-day)`
+                      : `${sel.from.toLocaleDateString(undefined, { month: "short", day: "numeric" })} – ${sel.to.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`}{" "}
                     ({days} day{days === 1 ? "" : "s"})
                   </p>
                   <div className="flex justify-between text-rogue-slate">
@@ -189,7 +203,8 @@ export default function RentalBookingPanel({ slug }: Props) {
                 </div>
               ) : (
                 <p className="text-sm text-rogue-slate mb-4">
-                  Select your pick-up and return dates on the calendar.
+                  Select your pick-up and return dates on the calendar
+                  {minDays > 1 ? ` (${minDays}-day minimum)` : ""}.
                 </p>
               )}
 
@@ -241,7 +256,7 @@ export default function RentalBookingPanel({ slug }: Props) {
 
               <Button
                 onClick={submit}
-                disabled={!range?.from || !range?.to || rangeCrossesBlocked || submitting}
+                disabled={!sel?.from || !sel?.to || rangeCrossesBlocked || belowMinimum || submitting}
                 className="w-full mt-4 bg-rogue-red hover:bg-rogue-red-dark text-white font-montserrat font-semibold py-6 rounded-full disabled:opacity-60"
               >
                 {submitting ? (

@@ -12,6 +12,8 @@ export interface ApiRentalCar {
   type: string;
   pricePerDay: number;
   securityDeposit: number;
+  /** Minimum rental length in days for online bookings (default 3). */
+  minRentalDays: number;
   isActive: boolean;
 }
 
