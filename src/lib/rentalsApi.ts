@@ -152,6 +152,40 @@ export const confirmRentalPayment = (paymentIntentId: string) =>
     { method: "POST" }
   );
 
+export interface RentalContractPage {
+  isFound: boolean;
+  isExpired: boolean;
+  isSigned: boolean;
+  isVoided: boolean;
+  /** Plain text; blank lines = paragraphs, lines starting "## " = headings. */
+  contractText: string;
+  carName: string;
+  customerName: string;
+  startDate: string;
+  endDate: string;
+  rentalSubtotal: number;
+  securityDeposit: number;
+  signedAt?: string | null;
+}
+
+export interface SignContractResult {
+  isSuccess: boolean;
+  errorMessage?: string;
+  signedAt?: string;
+}
+
+export const getRentalContract = (token: string) =>
+  request<RentalContractPage>(`/rentals/contract/${encodeURIComponent(token)}`);
+
+export const signRentalContract = (
+  token: string,
+  body: { signatureImage: string; signedByName: string; agreedToTerms: boolean }
+) =>
+  request<SignContractResult>(`/rentals/contract/${encodeURIComponent(token)}/sign`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+
 export const formatJmd = (n: number) => `J$${Math.round(n).toLocaleString()}`;
 
 export const STRIPE_PUBLISHABLE_KEY: string =
