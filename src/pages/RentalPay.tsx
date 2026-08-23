@@ -41,9 +41,9 @@ type PayOption = "Deposit50" | "FullWithSecurity";
 /** One-line policy summary for the cancel confirm dialog. */
 const cancelPolicyLine = (page: RentalPayPage) => {
   const hoursUntil = (new Date(page.startDate).getTime() - Date.now()) / 3600000;
-  return hoursUntil >= 48
-    ? "You're outside 48 hours of pickup, so everything paid is refunded in full."
-    : "You're inside 48 hours of pickup, so one day's rate is retained per the cancellation policy (security deposits always refund in full).";
+  return hoursUntil >= 24
+    ? "You're more than 24 hours from pickup, so everything paid is refunded in full."
+    : "You're inside 24 hours of pickup, so rental amounts are not refunded per the cancellation policy (security deposits always refund in full).";
 };
 
 const fmtDate = (iso: string) =>
@@ -315,9 +315,9 @@ const RentalPay = () => {
             )}
 
             <p className="text-xs text-rogue-slate mt-4">
-              Cancellation policy: free cancellation up to 48 hours before pickup (full refund).
-              Inside 48 hours, one day's rate applies; after the pickup day the booking deposit is
-              forfeited. Security deposits are always refunded in full.
+              Cancellation policy: free cancellation up to 24 hours before pickup (full refund).
+              Inside 24 hours of pickup, rental amounts are not refunded. Security deposits are
+              always refunded in full.
             </p>
 
             <div className="border-t border-slate-100 mt-6 pt-4 flex flex-col gap-2">
