@@ -10,6 +10,7 @@ import CarSales from "./pages/CarSales";
 import CarRentals from "./pages/CarRentals";
 import RentalDetail from "./pages/RentalDetail";
 import RentalPay from "./pages/RentalPay";
+import RentalContractSign from "./pages/RentalContractSign";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/car-sales" element={<CarSales />} />
             <Route path="/car-rentals" element={<CarRentals />} />
             <Route path="/car-rentals/pay/:token" element={<RentalPay />} />
+            <Route path="/car-rentals/contract/:token" element={<RentalContractSign />} />
             <Route path="/car-rentals/:slug" element={<RentalDetail />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
