@@ -5,7 +5,7 @@
  * emailed link here, reviews the agreement, draws a signature, types their
  * legal name, and submits. Both parties then receive the signed PDF by email.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -13,9 +13,11 @@ import {
   CalendarDays,
   CheckCircle2,
   FileText,
+  IdCard,
   Loader2,
   MessageCircle,
   ShieldCheck,
+  Upload,
   XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,7 +30,9 @@ import { whatsappUrl } from "@/lib/links";
 import {
   formatJmd,
   getRentalContract,
+  setLicenceInPerson,
   signRentalContract,
+  uploadDriversLicence,
   type RentalContractPage,
 } from "@/lib/rentalsApi";
 
@@ -74,11 +78,15 @@ const RentalContractSign = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [signedOk, setSignedOk] = useState(false);
+  const [licence, setLicence] = useState<LicenceStatus>("none");
 
   useEffect(() => {
     if (!token) return;
     getRentalContract(token)
-      .then(setPage)
+      .then((p) => {
+        setPage(p);
+        setLicence(p.hasLicenceUpload ? "uploaded" : p.licenceInPerson ? "inPerson" : "none");
+      })
       .catch((err) => setLoadError(err instanceof Error ? err.message : "Contract not found"))
       .finally(() => setLoading(false));
   }, [token]);
@@ -145,11 +153,20 @@ const RentalContractSign = () => {
 
     if (signedOk || page.isSigned) {
       return (
-        <StatusCard
-          icon={<CheckCircle2 className="h-14 w-14 text-green-500" />}
-          title="Agreement signed"
-          body={`Your rental agreement for the ${page.carName} (${fmtDate(page.startDate)} – ${fmtDate(page.endDate)}) is signed${signedOk ? " — a copy is on its way to your inbox" : ""}. See you at pickup!`}
-        />
+        <div className="max-w-xl mx-auto space-y-6">
+          <StatusCard
+            icon={<CheckCircle2 className="h-14 w-14 text-green-500" />}
+            title="Agreement signed"
+            body={`Your rental agreement for the ${page.carName} (${fmtDate(page.startDate)} – ${fmtDate(page.endDate)}) is signed${signedOk ? " — a copy is on its way to your inbox" : ""}. See you at pickup!`}
+          />
+          {token && (
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <LicenceSection token={token} status={licence} onStatus={setLicence} />
+              </CardContent>
+            </Card>
+          )}
+        </div>
       );
     }
 
@@ -216,6 +233,10 @@ const RentalContractSign = () => {
               placeholder="As it appears on your driver's licence"
               autoComplete="name"
             />
+
+            <div className="mt-5 pt-5 border-t border-slate-200">
+              <LicenceSection token={token!} status={licence} onStatus={setLicence} />
+            </div>
 
             <label className="flex items-start gap-2.5 mt-4 text-sm text-rogue-slate cursor-pointer">
               <input
@@ -287,6 +308,155 @@ const RentalContractSign = () => {
     </>
   );
 };
+
+type LicenceStatus = "none" | "uploaded" | "inPerson";
+
+const LICENCE_ACCEPT = "image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf";
+const LICENCE_MAX_BYTES = 10 * 1024 * 1024;
+
+/**
+ * Driver's licence collection: upload a copy now (stored privately, viewed
+ * only by staff) or promise to present it at pickup. Available both before
+ * and after signing.
+ */
+function LicenceSection({
+  token,
+  status,
+  onStatus,
+}: {
+  token: string;
+  status: LicenceStatus;
+  onStatus: (s: LicenceStatus) => void;
+}) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [busy, setBusy] = useState<"upload" | "inPerson" | null>(null);
+  const [error, setError] = useState("");
+
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (file.size > LICENCE_MAX_BYTES) {
+      setError("That file is over 10 MB — try a smaller photo.");
+      return;
+    }
+    setBusy("upload");
+    setError("");
+    try {
+      await uploadDriversLicence(token, file);
+      onStatus("uploaded");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not upload your licence.");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const chooseInPerson = async () => {
+    setBusy("inPerson");
+    setError("");
+    try {
+      await setLicenceInPerson(token);
+      onStatus("inPerson");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong — please try again.");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  return (
+    <div>
+      <p className="text-sm font-montserrat font-semibold text-rogue-charcoal mb-1 flex items-center gap-1.5">
+        <IdCard className="h-4 w-4 text-rogue-red" /> Driver's licence
+      </p>
+
+      {status === "uploaded" ? (
+        <div className="text-sm text-rogue-slate">
+          <p className="inline-flex items-center gap-1.5 text-green-600 font-medium">
+            <CheckCircle2 className="h-4 w-4" /> Licence received — thank you!
+          </p>
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            className="block mt-1 text-xs text-rogue-slate underline hover:text-rogue-red"
+            disabled={busy !== null}
+          >
+            {busy === "upload" ? "Uploading…" : "Upload a different copy"}
+          </button>
+        </div>
+      ) : (
+        <>
+          <p className="text-sm text-rogue-slate mb-3">
+            We need to verify your licence before pickup. Upload a photo now, or bring it with
+            you on the day.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => fileRef.current?.click()}
+              disabled={busy !== null}
+              className="rounded-full border-slate-300 font-montserrat font-semibold"
+            >
+              {busy === "upload" ? (
+                <>
+                  <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> Uploading…
+                </>
+              ) : (
+                <>
+                  <Upload className="mr-1.5 h-4 w-4" /> Upload a photo
+                </>
+              )}
+            </Button>
+            <Button
+              type="button"
+              variant={status === "inPerson" ? "default" : "outline"}
+              size="sm"
+              onClick={chooseInPerson}
+              disabled={busy !== null || status === "inPerson"}
+              className={
+                status === "inPerson"
+                  ? "rounded-full bg-rogue-charcoal hover:bg-rogue-charcoal font-montserrat font-semibold"
+                  : "rounded-full border-slate-300 font-montserrat font-semibold"
+              }
+            >
+              {busy === "inPerson" ? (
+                <>
+                  <Loader2 className="mr-1.5 h-4 w-4 animate-spin" /> Saving…
+                </>
+              ) : status === "inPerson" ? (
+                <>
+                  <CheckCircle2 className="mr-1.5 h-4 w-4" /> Bringing it in person
+                </>
+              ) : (
+                "I'll bring it in person"
+              )}
+            </Button>
+          </div>
+          <p className="text-xs text-rogue-slate/80 mt-2">
+            Photos or PDF, up to 10 MB. Stored securely — only our team can view it.
+          </p>
+        </>
+      )}
+
+      {error && (
+        <p className="text-sm text-rogue-red mt-2" role="alert">
+          {error}
+        </p>
+      )}
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept={LICENCE_ACCEPT}
+        onChange={onFile}
+        className="hidden"
+      />
+    </div>
+  );
+}
 
 function StatusCard({
   icon,
