@@ -166,6 +166,8 @@ export interface RentalContractPage {
   rentalSubtotal: number;
   securityDeposit: number;
   signedAt?: string | null;
+  hasLicenceUpload: boolean;
+  licenceInPerson: boolean;
 }
 
 export interface SignContractResult {
@@ -185,6 +187,29 @@ export const signRentalContract = (
     method: "POST",
     body: JSON.stringify(body),
   });
+
+/** Multipart upload — no JSON content-type header (browser sets the boundary). */
+export const uploadDriversLicence = async (token: string, file: File) => {
+  const form = new FormData();
+  form.append("file", file);
+  const res = await fetch(
+    `${API_BASE}/rentals/contract/${encodeURIComponent(token)}/licence`,
+    { method: "POST", body: form }
+  );
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    throw new Error(
+      (data as { message?: string } | null)?.message ??
+        "Could not upload your licence — please try again."
+    );
+  }
+};
+
+export const setLicenceInPerson = (token: string) =>
+  request<{ isSuccess: boolean }>(
+    `/rentals/contract/${encodeURIComponent(token)}/licence-in-person`,
+    { method: "POST" }
+  );
 
 export const formatJmd = (n: number) => `J$${Math.round(n).toLocaleString()}`;
 
