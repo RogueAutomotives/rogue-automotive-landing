@@ -48,6 +48,10 @@ export interface RentalPayPage {
   fullPaymentSecurityDeposit: number;
   /** What paying everything now saves on the security deposit (0 when ineligible). */
   fullPaymentSavings: number;
+  /** Deposit is settled with us at pickup, so it's excluded from this payment. */
+  securityDepositInPerson: boolean;
+  /** Deposit to bring to pickup (0 unless securityDepositInPerson). */
+  securityDueAtPickup: number;
   /** True when a cancellation request is pending staff review. */
   cancellationRequested: boolean;
   isExpired: boolean;

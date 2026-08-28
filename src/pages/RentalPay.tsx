@@ -227,10 +227,13 @@ const RentalPay = () => {
                 <Car className="h-4 w-4 text-rogue-red" />
                 {formatJmd(page.pricing.pricePerDay)} / day
               </p>
-              <p className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-rogue-red" />
-                Refundable security deposit: {formatJmd(page.pricing.securityDeposit)}
-              </p>
+              {page.pricing.securityDeposit > 0 && (
+                <p className="flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4 text-rogue-red" />
+                  Refundable security deposit: {formatJmd(page.pricing.securityDeposit)}
+                  {page.securityDepositInPerson && " — payable at pickup"}
+                </p>
+              )}
             </div>
 
             <div className="border-t border-slate-200 mt-4 pt-4 space-y-1.5 text-sm">
@@ -240,12 +243,19 @@ const RentalPay = () => {
                   {formatJmd(page.pricing.rentalSubtotal)}
                 </span>
               </div>
-              <div className="flex justify-between text-rogue-slate">
-                <span>Security deposit (refundable)</span>
-                <span className="font-semibold text-rogue-charcoal">
-                  {formatJmd(page.pricing.securityDeposit)}
-                </span>
-              </div>
+              {page.pricing.securityDeposit > 0 && (
+                <div className="flex justify-between text-rogue-slate">
+                  <span>
+                    Security deposit (refundable)
+                    {page.securityDepositInPerson && (
+                      <span className="text-xs text-rogue-slate/70"> · at pickup</span>
+                    )}
+                  </span>
+                  <span className="font-semibold text-rogue-charcoal">
+                    {formatJmd(page.pricing.securityDeposit)}
+                  </span>
+                </div>
+              )}
               {page.amountPaidOnline > 0 && (
                 <div className="flex justify-between text-green-600">
                   <span>Already paid</span>
@@ -271,13 +281,15 @@ const RentalPay = () => {
               <OptionButton
                 active={option === "FullWithSecurity"}
                 badge={canPayDeposit ? "Most popular" : undefined}
-                title={`Pay everything — ${formatJmd(page.balanceWithSecurity)}`}
+                title={`${page.securityDepositInPerson ? "Pay your rental in full" : "Pay everything"} — ${formatJmd(page.balanceWithSecurity)}`}
                 subtitle={
-                  page.paymentState === "DepositPaid"
-                    ? "Clears your remaining balance including the refundable security deposit."
-                    : page.fullPaymentSavings > 0
-                      ? `Save ${formatJmd(page.fullPaymentSavings)} — 20% off the refundable security deposit (${formatJmd(page.fullPaymentSecurityDeposit)} instead of ${formatJmd(page.pricing.securityDeposit)}). Nothing more to pay at pickup.`
-                      : "Rental total + refundable security deposit. Nothing more to pay at pickup."
+                  page.securityDepositInPerson
+                    ? `Covers your rental in full. The refundable ${formatJmd(page.securityDueAtPickup)} security deposit is settled with us in person at pickup.`
+                    : page.paymentState === "DepositPaid"
+                      ? "Clears your remaining balance including the refundable security deposit."
+                      : page.fullPaymentSavings > 0
+                        ? `Save ${formatJmd(page.fullPaymentSavings)} — 20% off the refundable security deposit (${formatJmd(page.fullPaymentSecurityDeposit)} instead of ${formatJmd(page.pricing.securityDeposit)}). Nothing more to pay at pickup.`
+                        : "Rental total + refundable security deposit. Nothing more to pay at pickup."
                 }
                 onClick={() => startPayment("FullWithSecurity")}
                 disabled={creatingIntent}
@@ -286,7 +298,11 @@ const RentalPay = () => {
                 <OptionButton
                   active={option === "Deposit50"}
                   title={`Pay 50% deposit — ${formatJmd(page.pricing.depositDue)}`}
-                  subtitle={`Locks your dates now. Remainder + ${formatJmd(page.pricing.securityDeposit)} full security deposit due at pickup.`}
+                  subtitle={
+                    page.pricing.securityDeposit > 0
+                      ? `Locks your dates now. Remainder + ${formatJmd(page.pricing.securityDeposit)} refundable security deposit due at pickup.`
+                      : "Locks your dates now. The remainder is due at pickup."
+                  }
                   onClick={() => startPayment("Deposit50")}
                   disabled={creatingIntent}
                   muted
