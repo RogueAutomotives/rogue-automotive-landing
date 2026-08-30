@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import { Check, ArrowRight, Sparkles, MessageCircle, Gem, Wand2, ShieldCheck, Lightbulb } from "lucide-react";
@@ -10,6 +11,7 @@ import AppShowcase from "@/components/AppShowcase";
 import Lounge from "@/components/Lounge";
 import JoinCommunity from "@/components/JoinCommunity";
 import { bookingUrl, whatsappUrl } from "@/lib/links";
+import { trackEvent } from "@/lib/metaPixel";
 import { getDetailingPackages } from "@/lib/api";
 
 // Curated marketing copy per tier (the API stores inclusions as prose; we present
@@ -391,7 +393,15 @@ const SpecialistServices = () => (
   </section>
 );
 
-const CarWash = () => (
+const CarWash = () => {
+  // Ad optimisation signal: this is the page paid Instagram traffic lands on,
+  // so a view here is the top of the measurable funnel and the densest event
+  // we can report back to Meta. Fires once per mount.
+  useEffect(() => {
+    trackEvent("ViewContent", { content_name: "Car Wash & Detailing" });
+  }, []);
+
+  return (
   <>
     <Helmet>
       <title>Wash &amp; Detailing — Rogue Automotive Jamaica | Book Online</title>
@@ -464,6 +474,7 @@ const CarWash = () => (
       <Footer />
     </div>
   </>
-);
+  );
+};
 
 export default CarWash;
