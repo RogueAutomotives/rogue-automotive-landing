@@ -31,6 +31,11 @@ jobs:
       - name: Build for Production
         # Stripe publishable key comes from the committed .env.production
         # (client-safe by design; Vite inlines it at build time).
+        env:
+          # Meta Pixel ID. Set as a repository *variable* (Settings → Secrets and
+          # variables → Actions → Variables) — a pixel ID is public by design.
+          # Unset = no pixel is injected at all.
+          VITE_META_PIXEL_ID: ${{ vars.VITE_META_PIXEL_ID }}
         run: |
           npm run build
           echo "www.rogueautomotiveja.com" > dist/CNAME
