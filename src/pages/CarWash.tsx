@@ -413,7 +413,9 @@ const CarWash = () => {
     </Helmet>
 
     <div className="min-h-screen bg-white font-roboto">
-      <SubPageNav />
+      {/* Membership is what this page grows — the body already carries plenty
+          of "Book a Detail" CTAs, so the sticky header pushes the free account. */}
+      <SubPageNav cta="signup" campaign="car-wash" />
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-rogue-dark via-rogue-charcoal to-rogue-red-dark text-white">
