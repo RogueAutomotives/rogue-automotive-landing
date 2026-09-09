@@ -68,6 +68,18 @@ const Hero = () => {
                   Contact
                 </a>
               </div>
+              {/* Members land here to check their loyalty card or book — a returning
+                  customer shouldn't have to hunt for the way back in. */}
+              <a
+                href={bookingUrl("/login", { content: "nav-signin" })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`font-montserrat font-semibold text-sm transition-colors ${
+                  isScrolled ? "text-rogue-charcoal hover:text-rogue-red" : "text-white hover:text-rogue-red"
+                }`}
+              >
+                Sign in
+              </a>
               <a href={bookingUrl("/book-a-detail", { content: "nav" })} target="_blank" rel="noopener noreferrer">
                 <Button className="bg-rogue-red hover:bg-rogue-red-dark text-white font-montserrat font-semibold rounded-full px-5">
                   Book a Detail

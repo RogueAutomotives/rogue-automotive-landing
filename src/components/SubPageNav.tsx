@@ -42,6 +42,17 @@ const SubPageNav = ({ cta = "book", campaign }: SubPageNavProps) => {
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             All services
           </Link>
+          <a
+            href={bookingUrl("/login", {
+              content: "subnav-signin",
+              ...(campaign ? { campaign } : {}),
+            })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-montserrat font-semibold text-sm text-rogue-silver hover:text-white transition-colors"
+          >
+            Sign in
+          </a>
           <a href={href} target="_blank" rel="noopener noreferrer">
             <Button className="bg-rogue-red hover:bg-rogue-red-dark text-white font-montserrat font-semibold rounded-full px-5">
               {isSignup ? (
