@@ -273,15 +273,34 @@ const RentalPay = () => {
               Hi {page.customerFirstName} — lock in your booking
             </h2>
             <p className="text-sm text-rogue-slate mb-5">
-              Your dates are held once payment is received.
+              Your dates are held as soon as we receive a deposit — you don't have to pay
+              everything up front to secure the car.
             </p>
 
             <div className="space-y-3 mb-5">
-              {/* Full payment first — the featured option (20% off the security deposit) */}
+              {/* The deposit leads. A 50% deposit secures the booking exactly as a
+                  full payment does — IsSecured only asks that SOME money arrived —
+                  so the customer gives up nothing by taking the smaller charge,
+                  and a smaller charge is far more likely to actually go through.
+                  This used to be the muted second option under a featured
+                  "pay everything", and people bounced off the big number. */}
+              {canPayDeposit && (
+                <OptionButton
+                  active={option === "Deposit50"}
+                  badge="Most popular"
+                  title={`Pay 50% deposit — ${formatJmd(page.pricing.depositDue)}`}
+                  subtitle={
+                    page.pricing.securityDeposit > 0
+                      ? `Locks your dates straight away. The remainder and the refundable ${formatJmd(page.pricing.securityDeposit)} security deposit are settled with us at pickup.`
+                      : "Locks your dates straight away. The remainder is settled with us at pickup."
+                  }
+                  onClick={() => startPayment("Deposit50")}
+                  disabled={creatingIntent}
+                />
+              )}
               <OptionButton
                 active={option === "FullWithSecurity"}
-                badge={canPayDeposit ? "Most popular" : undefined}
-                title={`${page.securityDepositInPerson ? "Pay your rental in full" : "Pay everything"} — ${formatJmd(page.balanceWithSecurity)}`}
+                title={`${page.securityDepositInPerson ? "Pay your rental in full" : "Pay everything now"} — ${formatJmd(page.balanceWithSecurity)}`}
                 subtitle={
                   page.securityDepositInPerson
                     ? `Covers your rental in full. The refundable ${formatJmd(page.securityDueAtPickup)} security deposit is settled with us in person at pickup.`
@@ -293,21 +312,8 @@ const RentalPay = () => {
                 }
                 onClick={() => startPayment("FullWithSecurity")}
                 disabled={creatingIntent}
+                muted={canPayDeposit}
               />
-              {canPayDeposit && (
-                <OptionButton
-                  active={option === "Deposit50"}
-                  title={`Pay 50% deposit — ${formatJmd(page.pricing.depositDue)}`}
-                  subtitle={
-                    page.pricing.securityDeposit > 0
-                      ? `Locks your dates now. Remainder + ${formatJmd(page.pricing.securityDeposit)} refundable security deposit due at pickup.`
-                      : "Locks your dates now. The remainder is due at pickup."
-                  }
-                  onClick={() => startPayment("Deposit50")}
-                  disabled={creatingIntent}
-                  muted
-                />
-              )}
             </div>
 
             {creatingIntent && (
