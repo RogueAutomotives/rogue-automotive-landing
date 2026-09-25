@@ -47,7 +47,7 @@ const CarRentals = () => {
         <title>Car Rentals — Rogue Automotive Jamaica | Daily Rates</title>
         <meta
           name="description"
-          content="Rent a Honda Odyssey, Fit Shuttle, Accord, Nissan Teana or BMW 328i GT in Kingston, Jamaica from J$9,000 per day. Insurance included — pick your dates and book online with Rogue Automotive."
+          content="Rent a Honda Odyssey, Fit Shuttle, Accord, Nissan Teana or BMW 328i GT in Kingston, Jamaica from J$10,000 per day. Insurance included — pick your dates and book online with Rogue Automotive."
         />
         <link rel="canonical" href="https://www.rogueautomotiveja.com/car-rentals" />
       </Helmet>
