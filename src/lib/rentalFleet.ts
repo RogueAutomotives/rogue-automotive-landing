@@ -79,7 +79,7 @@ export const FLEET: RentalCar[] = [
     slug: "nissan-teana",
     name: "Nissan Teana",
     type: "Sedan",
-    pricePerDay: 9000,
+    pricePerDay: 10000,
     blurb: "A smooth, executive-class sedan for business trips and everyday driving.",
     description:
       "The Teana is the easy pick for business travel and everyday driving: a soft, quiet ride, an automatic gearbox, and an executive-feeling cabin without the executive price. Comfortable for four adults on long drives.",
