@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/use-scroll";
 import { bookingUrl } from "@/lib/links";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLink =
   "transition-colors duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-red after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left";
@@ -108,7 +109,10 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
-            <a href={bookingUrl("/book-a-detail", { content: "hero" })} target="_blank" rel="noopener noreferrer">
+            {/* To the car-wash page first, not straight into the booking app:
+                the packages and prices are there, and it carries its own
+                booking CTAs for when they're ready. */}
+            <Link to="/car-wash">
               <Button
                 size="lg"
                 className="w-full sm:w-auto bg-rogue-red hover:bg-rogue-red-dark text-white border-0 px-7 py-6 text-base font-montserrat font-semibold rounded-full transition-all duration-300 hover:scale-[1.03] group shadow-lg shadow-rogue-red/30"
@@ -116,7 +120,7 @@ const Hero = () => {
                 Book a Detail
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
-            </a>
+            </Link>
             <Button
               size="lg"
               variant="outline"
