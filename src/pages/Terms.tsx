@@ -4,7 +4,7 @@ const Terms = () => (
   <LegalPage
     title="Terms of Service"
     subtitle="These Terms govern your access to and use of Rogue Automotive's website, booking application, and services. Please read them carefully."
-    effectiveDate="23 June 2026"
+    effectiveDate="2 November 2026"
     description="The Terms of Service governing use of Rogue Automotive's website, booking app and car-care services in Kingston, Jamaica."
     canonical="https://www.rogueautomotiveja.com/terms"
   >
@@ -69,19 +69,33 @@ const Terms = () => (
       method. We do not store full card details on our servers. Where you select pay-on-arrival, your booking
       slot is not secured until payment is completed, and the slot may be released to other customers.
     </p>
+    <p>
+      <strong>Deposits.</strong> When you book a detailing service and pay online by card, you pay a deposit of
+      thirty percent (30%) of the Booking total at checkout, rounded up to the nearest Jamaican dollar. The
+      deposit confirms your appointment slot. The remaining balance is payable at our location on the day of
+      service. If the final price changes because of the Vehicle's actual condition or services added at our
+      location, the balance is adjusted accordingly.
+    </p>
 
     <h2>7. Cancellations, no-shows, and rescheduling</h2>
     <p>
       Cancellations and rescheduling are subject to the cancellation policy presented at the time of booking.
       Late arrivals may result in a shortened service, rescheduling, or cancellation. Repeated no-shows may
-      result in a requirement to prepay or in suspension of booking privileges. Deposits or fees may be
-      non-refundable as set out in the policy in effect at the time of your Booking.
+      result in a requirement to prepay or in suspension of booking privileges.
+    </p>
+    <p>
+      <strong>Deposits are non-refundable.</strong> A deposit paid on a Booking is not refunded if you cancel the
+      Booking, do not attend, or arrive too late for the service to be performed. If you need to change your
+      appointment, contact us before the appointment time and we will reschedule your Booking, subject to
+      availability; your deposit carries over to the rescheduled Booking.
     </p>
 
     <h2>8. Refunds</h2>
     <p>
-      Refund eligibility is determined in accordance with the policy in effect at the time of your Booking and
-      applicable law. If you are dissatisfied with a service, you must notify us within a reasonable time so that
+      Deposits are non-refundable as set out in Section 7. Where we cancel a Booking ourselves (for example for
+      operational reasons), we will, at your option, reschedule the Booking or refund any amount you paid
+      online. Otherwise, refund eligibility is determined in accordance with the policy in effect at the time of
+      your Booking and applicable law. If you are dissatisfied with a service, you must notify us within a reasonable time so that
       we have an opportunity to inspect and, where appropriate, remedy the issue.
     </p>
 
