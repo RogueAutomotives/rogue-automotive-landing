@@ -11,6 +11,12 @@ import CarRentals from "./pages/CarRentals";
 import RentalDetail from "./pages/RentalDetail";
 import RentalPay from "./pages/RentalPay";
 import RentalContractSign from "./pages/RentalContractSign";
+import PartsGate from "./pages/parts/PartsGate";
+import PartsList from "./pages/parts/PartsList";
+import PartDetail from "./pages/parts/PartDetail";
+import PartsOrder from "./pages/parts/PartsOrder";
+import PartsInvoicePage from "./pages/parts/PartsInvoicePage";
+import PartsSheet from "./pages/parts/PartsSheet";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -36,6 +42,12 @@ const App = () => (
             <Route path="/car-rentals/pay/:token" element={<RentalPay />} />
             <Route path="/car-rentals/contract/:token" element={<RentalContractSign />} />
             <Route path="/car-rentals/:slug" element={<RentalDetail />} />
+            <Route path="/parts" element={<PartsGate />} />
+            <Route path="/parts/list" element={<PartsList />} />
+            <Route path="/parts/order" element={<PartsOrder />} />
+            <Route path="/parts/sheet" element={<PartsSheet />} />
+            <Route path="/parts/invoice/:number" element={<PartsInvoicePage />} />
+            <Route path="/parts/:slug" element={<PartDetail />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
