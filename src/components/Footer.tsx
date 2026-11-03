@@ -36,6 +36,7 @@ const Footer = () => {
               <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-white transition-colors text-sm">Services</a></li>
               <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-white transition-colors text-sm">About Us</a></li>
               <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors text-sm">Contact Us</a></li>
+              <li><Link to="/parts" className="hover:text-white transition-colors text-sm">Rogue Parts — Rely R8</Link></li>
               <li><a href="#testimonials" onClick={(e) => scrollToSection(e, 'testimonials')} className="hover:text-white transition-colors text-sm">Reviews</a></li>
             </ul>
           </div>

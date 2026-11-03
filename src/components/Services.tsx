@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { BUSINESS_LINES, STATUS_LABEL } from "@/lib/businessLines";
 
@@ -92,6 +92,23 @@ const Services = () => {
             );
           })}
         </div>
+
+        {/* Rogue Parts — a group-buy, not a full business line, so a slim strip rather than a fourth card. */}
+        <Link
+          to="/parts"
+          className="group mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-rogue-light px-5 py-4 hover:border-rogue-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rogue-red"
+        >
+          <span className="flex items-center gap-3">
+            <Wrench className="h-5 w-5 text-rogue-red shrink-0" />
+            <span>
+              <span className="font-montserrat font-bold text-rogue-charcoal">Rogue Parts</span>
+              <span className="text-sm text-rogue-slate"> — bars, covers, liners and mats for the Rely R8, pooled into one container from the factory.</span>
+            </span>
+          </span>
+          <span className="inline-flex items-center font-montserrat font-semibold text-sm text-rogue-charcoal group-hover:text-rogue-red">
+            See the parts <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </span>
+        </Link>
       </div>
     </section>
   );
