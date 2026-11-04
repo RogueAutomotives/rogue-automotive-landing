@@ -8,6 +8,13 @@ permissions:
   pages: write
   id-token: write
 
+# One Pages deployment at a time. Note: Pages names each deployment after the
+# commit SHA, so re-running a deploy whose Pages side hung or was cancelled
+# polls that dead deployment and times out — a fresh commit is needed.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   deploy:
     environment:
