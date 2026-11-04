@@ -53,7 +53,7 @@ const Hero = () => {
               />
             </a>
 
-            <div className="flex items-center gap-6 sm:gap-8">
+            <div className="flex items-center gap-4 sm:gap-8">
               <div
                 className={`hidden md:flex items-center gap-8 ${
                   isScrolled ? "text-rogue-charcoal" : "text-white"
@@ -62,6 +62,9 @@ const Hero = () => {
                 <a href="#services" onClick={scrollTo("#services")} className={navLink}>
                   Services
                 </a>
+                <Link to="/parts" className={navLink}>
+                  Parts
+                </Link>
                 <a href="#about" onClick={scrollTo("#about")} className={navLink}>
                   About
                 </a>
@@ -69,6 +72,15 @@ const Hero = () => {
                   Contact
                 </a>
               </div>
+              {/* Phones get no section links, but Parts is its own page — keep it reachable. */}
+              <Link
+                to="/parts"
+                className={`md:hidden font-montserrat font-semibold text-sm transition-colors ${
+                  isScrolled ? "text-rogue-charcoal hover:text-rogue-red" : "text-white hover:text-rogue-red"
+                }`}
+              >
+                Parts
+              </Link>
               {/* Members land here to check their loyalty card or book — a returning
                   customer shouldn't have to hunt for the way back in. */}
               <a

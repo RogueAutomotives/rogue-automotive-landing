@@ -34,13 +34,19 @@ const SubPageNav = ({ cta = "book", campaign }: SubPageNavProps) => {
             style={{ filter: "brightness(0) invert(1)" }}
           />
         </Link>
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <Link
             to="/"
             className="hidden sm:inline-flex items-center text-sm text-rogue-silver hover:text-white transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             All services
+          </Link>
+          <Link
+            to="/parts"
+            className="font-montserrat font-semibold text-sm text-rogue-silver hover:text-white transition-colors"
+          >
+            Parts
           </Link>
           <a
             href={bookingUrl("/login", {
