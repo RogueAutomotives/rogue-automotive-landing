@@ -247,9 +247,8 @@ const Contact = () => {
                 <CardContent className="p-5 sm:p-6">
                   <h3 className="text-lg font-montserrat font-bold text-rogue-charcoal mb-3">Business hours</h3>
                   <ul className="space-y-1.5 text-sm text-rogue-slate">
-                    <li className="flex justify-between"><span>Mon – Fri</span><span>8:00 AM – 7:00 PM</span></li>
-                    <li className="flex justify-between"><span>Saturday</span><span>9:00 AM – 6:00 PM</span></li>
-                    <li className="flex justify-between"><span>Sunday</span><span>10:00 AM – 4:00 PM</span></li>
+                    <li className="flex justify-between"><span>Mon – Sat</span><span>9:00 AM – 9:00 PM</span></li>
+                    <li className="flex justify-between"><span>Sunday</span><span>9:00 AM – 6:00 PM</span></li>
                   </ul>
                 </CardContent>
               </Card>

@@ -108,15 +108,15 @@ export function bookingUrl(
   return `${BOOKING_APP}${path}?${params.toString()}`;
 }
 
-/** WhatsApp click-to-chat (business line (876) 597-4550). */
+/** WhatsApp click-to-chat (business line (876) 324-0632). */
 export function whatsappUrl(message?: string): string {
-  const base = "https://wa.me/18765974550";
+  const base = "https://wa.me/18763240632";
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
 export const CONTACT = {
-  phone: "(876) 597-4550",
-  phoneHref: "tel:+18765974550",
+  phone: "(876) 324-0632",
+  phoneHref: "tel:+18763240632",
   email: "rogueautomotiveja@gmail.com",
   emailHref: "mailto:rogueautomotiveja@gmail.com",
   address: "17 Westminster Rd, Kingston 10, Jamaica",
