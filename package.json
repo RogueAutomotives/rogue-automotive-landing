@@ -14,7 +14,7 @@
     "predeploy": "echo www.rogueautomotiveja.com > dist/CNAME",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/static-routes.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
