@@ -17,6 +17,8 @@ import PartDetail from "./pages/parts/PartDetail";
 import PartsOrder from "./pages/parts/PartsOrder";
 import PartsInvoicePage from "./pages/parts/PartsInvoicePage";
 import PartsSheet from "./pages/parts/PartsSheet";
+import CeramicSealantOffer from "./pages/offers/CeramicSealantOffer";
+import CeramicCoatingOffer from "./pages/offers/CeramicCoatingOffer";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -48,6 +50,8 @@ const App = () => (
             <Route path="/parts/sheet" element={<PartsSheet />} />
             <Route path="/parts/invoice/:number" element={<PartsInvoicePage />} />
             <Route path="/parts/:slug" element={<PartDetail />} />
+            <Route path="/offers/ceramic-sealant" element={<CeramicSealantOffer />} />
+            <Route path="/offers/ceramic-coating" element={<CeramicCoatingOffer />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

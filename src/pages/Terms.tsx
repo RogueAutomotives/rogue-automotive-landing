@@ -227,7 +227,7 @@ const Terms = () => (
       Rogue Automotive Ltd<br />
       17 Westminster Road, Kingston 10, Jamaica<br />
       Email: <a href="mailto:rogueautomotiveja@gmail.com">rogueautomotiveja@gmail.com</a><br />
-      Phone: <a href="tel:+18765974550">(876) 597-4550</a>
+      Phone: <a href="tel:+18763240632">(876) 324-0632</a>
     </p>
   </LegalPage>
 );

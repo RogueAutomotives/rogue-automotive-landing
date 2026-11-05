@@ -46,16 +46,12 @@ const Footer = () => {
             <h4 className="font-montserrat font-bold text-lg mb-4 text-white">Opening Hours</h4>
             <ul className="space-y-2 text-rogue-silver text-sm">
               <li className="flex justify-between">
-                <span>Monday - Friday</span>
-                <span>8:00 AM - 7:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday</span>
-                <span>9:00 AM - 6:00 PM</span>
+                <span>Monday - Saturday</span>
+                <span>9:00 AM - 9:00 PM</span>
               </li>
               <li className="flex justify-between">
                 <span>Sunday</span>
-                <span>10:00 AM - 4:00 PM</span>
+                <span>9:00 AM - 6:00 PM</span>
               </li>
             </ul>
             <p className="text-xs text-rogue-silver mt-3 italic">Holiday hours may vary</p>
@@ -75,7 +71,7 @@ const Footer = () => {
                 <svg className="w-4 h-4 text-rogue-maroon flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
-                <span>(876) 597-4550</span>
+                <span>(876) 324-0632</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-rogue-maroon flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

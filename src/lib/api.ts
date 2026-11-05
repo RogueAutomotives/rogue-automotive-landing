@@ -81,3 +81,31 @@ export async function getDetailingPackages(): Promise<DetailingPackage[]> {
       isFeatured: !!s.isFeatured,
     }));
 }
+
+export interface WashPrice {
+  serviceType: number; // 1 = Exterior Wash, 2 = Wash & Vacuum
+  serviceTypeName: string;
+  vehicleType: number; // 1 = Sedan
+  price: number;
+}
+
+/** The walk-in wash price list (what the counter charges, per vehicle type). */
+export async function getWashPrices(): Promise<WashPrice[]> {
+  return getJson<WashPrice[]>("/washlogs/prices");
+}
+
+export interface CoatingService {
+  id: string;
+  name: string;
+  description: string;
+  basePrice: number;
+}
+
+/** The ceramic coating services (quote-based), cheapest first. */
+export async function getCoatingServices(): Promise<CoatingService[]> {
+  const items = await getJson<DetailingServiceListItem[]>("/detailingservices");
+  return items
+    .filter((s) => s.isActive && /^ceramic coating/i.test(s.name.trim()))
+    .sort((a, b) => a.basePrice - b.basePrice)
+    .map((s) => ({ id: s.id, name: s.name, description: s.description, basePrice: s.basePrice }));
+}
