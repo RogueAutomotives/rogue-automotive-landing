@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, Car, Check, MessageCircle } from "lucide-react";
@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import RentalBookingPanel from "@/components/RentalBookingPanel";
 import { whatsappUrl } from "@/lib/links";
 import { findRental, formatJmd } from "@/lib/rentalFleet";
+import { trackEvent } from "@/lib/metaPixel";
 
 /**
  * Rental PDP — /car-rentals/:slug. Photo gallery, spec sheet and a
@@ -18,6 +19,11 @@ const RentalDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const car = findRental(slug);
   const [activeImage, setActiveImage] = useState(0);
+
+  // Rental ads optimise on these three: car viewed → booking started → deposit paid.
+  useEffect(() => {
+    if (car) trackEvent("ViewContent", { content_name: car.name, content_ids: [car.slug], content_type: "rental", value: car.pricePerDay, currency: "JMD" });
+  }, [car]);
 
   if (!car) return <Navigate to="/car-rentals" replace />;
 

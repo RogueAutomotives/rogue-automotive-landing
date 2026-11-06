@@ -13,6 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { Loader2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/metaPixel";
 import {
   confirmRentalPayment,
   formatJmd,
@@ -55,6 +56,8 @@ function InnerForm({ amount, onResult }: Omit<Props, "clientSecret">) {
     if (paymentIntent?.status === "succeeded" || paymentIntent?.status === "processing") {
       try {
         const result = await confirmRentalPayment(paymentIntent.id);
+        // The money actually taken (the deposit), not the rental total.
+        trackEvent("Purchase", { content_type: "rental", value: amount, currency: "JMD" });
         onResult(result);
       } catch (err) {
         // Money may already be captured; the server confirm is idempotent —

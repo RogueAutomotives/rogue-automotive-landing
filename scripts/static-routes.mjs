@@ -5,7 +5,13 @@
 // "/<route>/"). The app router renders the right page from the path as usual.
 import { copyFileSync, mkdirSync } from "node:fs";
 
-const AD_ROUTES = ["offers/ceramic-sealant", "offers/ceramic-coating"];
+const AD_ROUTES = [
+  "offers/ceramic-sealant",
+  "offers/ceramic-coating",
+  "car-rentals",
+  "car-rentals/honda-accord",
+  "car-rentals/honda-fit-shuttle",
+];
 
 for (const route of AD_ROUTES) {
   mkdirSync(`dist/${route}`, { recursive: true });
