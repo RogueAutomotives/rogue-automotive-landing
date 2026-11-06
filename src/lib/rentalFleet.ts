@@ -26,32 +26,6 @@ export interface RentalCar {
 
 export const FLEET: RentalCar[] = [
   {
-    slug: "bmw-328i-gt",
-    name: "BMW 328i GT",
-    type: "Luxury",
-    pricePerDay: 20000,
-    blurb: "The head-turner — a turbocharged BMW Gran Turismo with a sunroof and red leather.",
-    description:
-      "Our flagship rental. The 328i Gran Turismo pairs BMW's turbocharged four with a hatchback body that swallows luggage, wrapped in red leather with a panoramic sunroof. For weddings, special occasions, or simply making the trip feel like the destination.",
-    points: ["Seats 5", "Turbocharged — effortless overtaking", "Red leather interior", "Panoramic sunroof"],
-    specs: [
-      { label: "Seats", value: "5" },
-      { label: "Transmission", value: "Automatic" },
-      { label: "Fuel", value: "Petrol (turbo)" },
-      { label: "Interior", value: "Red leather" },
-      { label: "Sunroof", value: "Panoramic" },
-      { label: "Insurance", value: "Included" },
-    ],
-    images: [
-      "/lovable-uploads/rental-bmw-328i-gt-1.jpg",
-      "/lovable-uploads/rental-bmw-328i-gt-2.jpg",
-      "/lovable-uploads/rental-bmw-328i-gt-3.jpg",
-      "/lovable-uploads/rental-bmw-328i-gt-4.jpg",
-      "/lovable-uploads/rental-bmw-328i-gt-5.jpg",
-      "/lovable-uploads/rental-bmw-328i-gt-6.jpg",
-    ],
-  },
-  {
     slug: "honda-accord",
     name: "Honda Accord",
     type: "Sedan",
@@ -73,54 +47,6 @@ export const FLEET: RentalCar[] = [
       "/lovable-uploads/rental-honda-accord-3.jpg",
       "/lovable-uploads/rental-honda-accord-4.jpg",
       "/lovable-uploads/rental-honda-accord-5.jpg",
-    ],
-  },
-  {
-    slug: "nissan-teana",
-    name: "Nissan Teana",
-    type: "Sedan",
-    pricePerDay: 10000,
-    blurb: "A smooth, executive-class sedan for business trips and everyday driving.",
-    description:
-      "The Teana is the easy pick for business travel and everyday driving: a soft, quiet ride, an automatic gearbox, and an executive-feeling cabin without the executive price. Comfortable for four adults on long drives.",
-    points: ["Seats 5", "Automatic transmission", "Cold A/C", "Comfortable highway cruiser"],
-    specs: [
-      { label: "Seats", value: "5" },
-      { label: "Transmission", value: "Automatic" },
-      { label: "Fuel", value: "Petrol" },
-      { label: "Air conditioning", value: "Yes" },
-      { label: "Insurance", value: "Included" },
-    ],
-    images: [
-      "/lovable-uploads/rental-nissan-teana-1.jpg",
-      "/lovable-uploads/rental-nissan-teana-2.jpg",
-      "/lovable-uploads/rental-nissan-teana-3.jpg",
-      "/lovable-uploads/rental-nissan-teana-4.jpg",
-      "/lovable-uploads/rental-nissan-teana-5.jpg",
-    ],
-  },
-  {
-    slug: "honda-odyssey",
-    name: "Honda Odyssey",
-    type: "Minivan",
-    pricePerDay: 10000,
-    blurb: "Room for the whole crew — airport runs, family trips and group outings in comfort.",
-    description:
-      "The Odyssey is the fleet's people-mover: seven proper seats, cold air throughout, and enough luggage room for an airport run with the whole family's bags. Sliding doors make loading kids (and car seats) painless, and it cruises quietly on the highway.",
-    points: ["Seats up to 7", "Automatic transmission", "Cold A/C throughout", "Generous luggage space"],
-    specs: [
-      { label: "Seats", value: "7" },
-      { label: "Transmission", value: "Automatic" },
-      { label: "Fuel", value: "Petrol" },
-      { label: "Air conditioning", value: "Front & rear" },
-      { label: "Insurance", value: "Included" },
-    ],
-    images: [
-      "/lovable-uploads/rental-honda-odyssey-1.jpg",
-      "/lovable-uploads/rental-honda-odyssey-2.jpg",
-      "/lovable-uploads/rental-honda-odyssey-3.jpg",
-      "/lovable-uploads/rental-honda-odyssey-4.jpg",
-      "/lovable-uploads/rental-honda-odyssey-5.jpg",
     ],
   },
   {

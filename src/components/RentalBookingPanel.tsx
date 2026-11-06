@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { DateRange } from "react-day-picker";
 import { AlertCircle, CalendarDays, Loader2, ShieldCheck } from "lucide-react";
+import { trackEvent } from "@/lib/metaPixel";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
@@ -122,6 +123,7 @@ export default function RentalBookingPanel({ slug }: Props) {
         utmContent: params.get("utm_content") ?? undefined,
         referrer: document.referrer || undefined,
       });
+      trackEvent("InitiateCheckout", { content_name: car.name, content_ids: [car.slug], content_type: "rental", currency: "JMD" });
       navigate(`/car-rentals/pay/${result.token}`);
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Something went wrong — please try again.");
