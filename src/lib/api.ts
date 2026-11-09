@@ -109,3 +109,23 @@ export async function getCoatingServices(): Promise<CoatingService[]> {
     .sort((a, b) => a.basePrice - b.basePrice)
     .map((s) => ({ id: s.id, name: s.name, description: s.description, basePrice: s.basePrice }));
 }
+
+export interface ComboService {
+  id: string;
+  name: string;
+  basePrice: number;
+  /** Last Jamaica date the service can be booked ("YYYY-MM-DD"), if time-boxed. */
+  availableUntil?: string | null;
+}
+
+/**
+ * The Coating Combo promo service, or null when the catalog doesn't list it
+ * (the API hides it once its availableUntil date has passed).
+ */
+export async function getCoatingCombo(): Promise<ComboService | null> {
+  const items = await getJson<(DetailingServiceListItem & { availableUntil?: string | null })[]>("/detailingservices");
+  const combo = items.find((s) => s.isActive && /^coating combo/i.test(s.name.trim()));
+  return combo
+    ? { id: combo.id, name: combo.name, basePrice: combo.basePrice, availableUntil: combo.availableUntil ?? null }
+    : null;
+}

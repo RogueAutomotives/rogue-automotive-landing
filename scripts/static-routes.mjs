@@ -8,6 +8,7 @@ import { copyFileSync, mkdirSync } from "node:fs";
 const AD_ROUTES = [
   "offers/ceramic-sealant",
   "offers/ceramic-coating",
+  "offers/coating-combo",
   "car-rentals",
   "car-rentals/honda-accord",
   "car-rentals/honda-fit-shuttle",
