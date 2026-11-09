@@ -3,6 +3,7 @@ import { useScroll } from "@/hooks/use-scroll";
 import { bookingUrl } from "@/lib/links";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import PromoStrip from "@/components/PromoStrip";
 
 const navLink =
   "transition-colors duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-rogue-red after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left";
@@ -106,6 +107,7 @@ const Hero = () => {
       {/* Hero content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 flex items-center min-h-[100svh]">
         <div className="max-w-3xl py-28">
+          <PromoStrip />
           <p className="text-rogue-red font-montserrat font-semibold tracking-[0.2em] text-xs sm:text-sm uppercase mb-5 animate-fade-in">
             Rogue Automotive · Kingston, Jamaica
           </p>
