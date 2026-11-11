@@ -12,6 +12,8 @@ export interface RentalCar {
   name: string;
   type: string;
   pricePerDay: number;
+  /** Fixed USD guide price for overseas visitors (display only — bookings charge in JMD). */
+  priceUsdPerDay: number;
   /** Card + PDP hero blurb. */
   blurb: string;
   /** Longer PDP description. */
@@ -30,6 +32,7 @@ export const FLEET: RentalCar[] = [
     name: "Honda Accord",
     type: "Sedan",
     pricePerDay: 18000,
+    priceUsdPerDay: 120,
     blurb: "A refined midsize sedan — polished, powerful and comfortable everywhere.",
     description:
       "The Accord blends executive comfort with Honda dependability: a composed highway ride, a quiet, well-finished cabin, and enough performance to make cross-island trips effortless. The step-up sedan when you want to arrive relaxed.",
@@ -54,6 +57,7 @@ export const FLEET: RentalCar[] = [
     name: "Honda Fit Shuttle",
     type: "Hybrid wagon",
     pricePerDay: 10000,
+    priceUsdPerDay: 70,
     blurb: "A thrifty hybrid wagon — nimble in town, surprisingly big in the back.",
     description:
       "The Fit Shuttle is the smart-money rental: Honda's hybrid system sips fuel in Kingston traffic, it parks anywhere, and the wagon body hides a load bay far bigger than the footprint suggests. Ideal for solo travellers, couples and errand-heavy weeks.",
