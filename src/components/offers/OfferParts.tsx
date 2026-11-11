@@ -120,7 +120,7 @@ export const OfferCta = ({ title, cta }: { title: string; cta: { label: string; 
         </span>
         <span className="inline-flex items-center gap-2">
           <Clock className="h-4 w-4" />
-          Open till 9 PM (Sundays till 6)
+          Open 9 AM: till 7 PM Mon–Thu, 9 PM Fri–Sat, 6 PM Sun
         </span>
       </div>
     </div>
