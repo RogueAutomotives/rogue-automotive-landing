@@ -36,7 +36,7 @@ const RentalDetail = () => {
         <title>{`${car.name} Rental — ${formatJmd(car.pricePerDay)}/day | Rogue Automotive Jamaica`}</title>
         <meta
           name="description"
-          content={`Rent a ${car.name} in Kingston, Jamaica for ${formatJmd(car.pricePerDay)} per day, insurance included. ${car.blurb}`}
+          content={`Rent a ${car.name} in Kingston, Jamaica for ${formatJmd(car.pricePerDay)} (about US$${car.priceUsdPerDay}) per day, insurance included. ${car.blurb}`}
         />
         <link rel="canonical" href={`https://www.rogueautomotiveja.com/car-rentals/${car.slug}`} />
       </Helmet>
@@ -99,9 +99,12 @@ const RentalDetail = () => {
               <h1 className="text-3xl sm:text-4xl font-montserrat font-bold text-rogue-charcoal mb-2">
                 {car.name}
               </h1>
-              <p className="text-3xl font-montserrat font-bold text-rogue-red mb-5">
+              <p className="text-3xl font-montserrat font-bold text-rogue-red mb-1">
                 {formatJmd(car.pricePerDay)}
                 <span className="text-base font-semibold text-rogue-slate"> / day · insurance included</span>
+              </p>
+              <p className="text-sm font-semibold text-rogue-slate mb-5">
+                ≈ US${car.priceUsdPerDay} / day for visitors · charged in JMD
               </p>
 
               <p className="text-base text-rogue-slate leading-relaxed mb-6">{car.description}</p>
@@ -139,6 +142,9 @@ const RentalDetail = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1"
+                  onClick={() =>
+                    trackEvent("Contact", { content_name: car.name, content_ids: [car.slug], content_type: "rental", channel: "whatsapp" })
+                  }
                 >
                   <Button
                     variant="outline"

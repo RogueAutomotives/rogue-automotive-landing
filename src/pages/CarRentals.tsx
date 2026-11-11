@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import SubPageNav from "@/components/SubPageNav";
 import Footer from "@/components/Footer";
 import { whatsappUrl, CONTACT } from "@/lib/links";
+import { trackEvent } from "@/lib/metaPixel";
+
+/** WhatsApp taps are rental leads too — report them so ads can optimise on them. */
+const trackRentalWhatsApp = () => trackEvent("Contact", { content_type: "rental", channel: "whatsapp" });
 
 import { FLEET, formatJmd } from "@/lib/rentalFleet";
 
@@ -79,7 +83,7 @@ const CarRentals = () => {
                 <CalendarDays className="mr-2 h-5 w-5" />
                 Book a car
               </Button>
-              <a href={whatsappUrl("Hi Rogue Automotive — I'd like to ask about car rentals.")} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl("Hi Rogue Automotive — I'd like to ask about car rentals.")} target="_blank" rel="noopener noreferrer" onClick={trackRentalWhatsApp}>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border-white/30 px-7 py-6 text-base font-montserrat font-semibold rounded-full">
                   <MessageCircle className="mr-2 h-5 w-5" />
                   Ask on WhatsApp
@@ -118,6 +122,7 @@ const CarRentals = () => {
                     {formatJmd(car.pricePerDay)}
                     <span className="text-sm font-semibold text-rogue-slate"> / day</span>
                   </p>
+                  <p className="text-sm font-semibold text-rogue-slate -mt-1 mb-2">≈ US${car.priceUsdPerDay} / day</p>
                   <p className="text-sm text-rogue-slate mb-4 leading-relaxed">{car.blurb}</p>
                   <ul className="space-y-1.5 mb-6">
                     {car.points.map((pt) => (
@@ -152,6 +157,7 @@ const CarRentals = () => {
                 href={whatsappUrl("Hi Rogue Automotive — I'd like to book a rental car.")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackRentalWhatsApp}
                 className="flex items-center gap-2 hover:text-rogue-red transition-colors"
               >
                 <MessageCircle className="h-4 w-4 text-rogue-red" /> Prefer to book by chat? WhatsApp us
