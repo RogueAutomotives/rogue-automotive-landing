@@ -12,6 +12,9 @@ const AD_ROUTES = [
   "car-rentals",
   "car-rentals/honda-accord",
   "car-rentals/honda-fit-shuttle",
+  // Legal pages: Meta checks the privacy and data-deletion URLs for the messaging app.
+  "privacy",
+  "terms",
 ];
 
 for (const route of AD_ROUTES) {
