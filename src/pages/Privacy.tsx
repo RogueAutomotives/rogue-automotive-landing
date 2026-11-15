@@ -4,7 +4,7 @@ const Privacy = () => (
   <LegalPage
     title="Privacy Policy"
     subtitle="This Policy explains what personal data Rogue Automotive collects, how we use and protect it, and the rights you have under Jamaican data-protection law."
-    effectiveDate="23 June 2026"
+    effectiveDate="14 November 2026"
     description="How Rogue Automotive collects, uses, shares and protects personal data, and your rights under Jamaica's Data Protection Act, 2020."
     canonical="https://www.rogueautomotiveja.com/privacy"
   >
@@ -31,7 +31,7 @@ const Privacy = () => (
       <li><strong>Vehicle information</strong> — make, model, year, vehicle type, license plate, color, and photographs of your vehicle.</li>
       <li><strong>Booking and service information</strong> — services selected, appointment dates and times, notes you provide, service history, loyalty and subscription details, and queue activity.</li>
       <li><strong>Payment information</strong> — payments are processed by our payment provider, Stripe. We receive limited transaction details (such as confirmation and amounts) but do not collect or store full card numbers on our servers.</li>
-      <li><strong>Communications</strong> — messages you send us through contact or enquiry forms, email, phone, or messaging apps.</li>
+      <li><strong>Communications</strong> — messages you send us through contact or enquiry forms, email, phone, or messaging apps, including Instagram and WhatsApp direct messages together with the profile name and username those apps share with us.</li>
       <li><strong>Marketing and attribution data</strong> — information about how you reached us, including campaign and referral parameters, where available.</li>
       <li><strong>Usage and device data</strong> — information automatically collected when you use the Services, such as IP address, browser and device type, pages viewed, and similar diagnostics.</li>
     </ul>
@@ -55,6 +55,15 @@ const Privacy = () => (
       <li>send marketing communications where you have consented or as otherwise permitted by law; and</li>
       <li>comply with legal obligations, prevent fraud and abuse, and protect our rights and the safety of others.</li>
     </ul>
+    <p id="messaging">
+      <strong>Automated replies to your messages.</strong> When you message us on Instagram or WhatsApp, an
+      automated assistant may read your message and reply on our behalf to answer questions about our services,
+      prices, wait times, and rentals. It uses only the messages in that conversation, your profile name, and our
+      own service information. A member of our team can see these conversations, can take over at any time, and
+      takes over automatically when you ask for a person or raise a complaint, refund, or damage concern. We use
+      these messages only to respond to you and to improve our customer service; we do not use them for
+      advertising profiles or sell them.
+    </p>
 
     <h2>6. Lawful bases for processing</h2>
     <p>We process personal data where:</p>
@@ -68,7 +77,7 @@ const Privacy = () => (
     <h2>7. How we share your information</h2>
     <p>We do not sell your personal data. We share it only as described below:</p>
     <ul>
-      <li><strong>Service providers</strong> — third parties that process data on our behalf, including Stripe (payments), Google / Firebase (authentication and infrastructure), our email delivery provider, mapping services, and cloud hosting providers.</li>
+      <li><strong>Service providers</strong> — third parties that process data on our behalf, including Stripe (payments), Google / Firebase (authentication and infrastructure), Meta Platforms (Instagram and WhatsApp messaging), Anthropic (the AI service that drafts replies to your messages, which does not use them to train its models), our email delivery provider, mapping services, and cloud hosting providers.</li>
       <li><strong>Legal and safety</strong> — where required by law, regulation, legal process, or governmental request, or to protect the rights, property, or safety of Rogue Automotive, our customers, or others.</li>
       <li><strong>Business transfers</strong> — in connection with a merger, acquisition, financing, or sale of assets, subject to appropriate confidentiality protections.</li>
     </ul>
@@ -103,6 +112,16 @@ const Privacy = () => (
       deletion of your data; to object to or request restriction of certain processing; to withdraw consent where
       processing is based on consent; and to lodge a complaint with the supervisory authority. To exercise these
       rights, contact us using the details below. We may need to verify your identity before responding.
+    </p>
+    <p id="data-deletion">
+      <strong>Deleting your data, including your Instagram and WhatsApp messages.</strong> To ask us to delete
+      your personal data, including the conversations you have had with us on Instagram or WhatsApp, either send
+      us a direct message saying "delete my data" from the account you used, or email{" "}
+      <a href="mailto:rogueautomotiveja@gmail.com">rogueautomotiveja@gmail.com</a> with your name and the
+      Instagram username or WhatsApp number concerned. We will delete the conversation and related data from our
+      systems within 30 days and confirm when it is done, except for records we must keep by law (such as
+      payment records). You can also delete messages from your own app at any time; this does not remove our
+      copy, so please ask us as described above.
     </p>
 
     <h2 id="cookies">12. Cookies and similar technologies</h2>
