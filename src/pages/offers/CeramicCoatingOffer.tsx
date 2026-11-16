@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import Footer from "@/components/Footer";
-import { OfferCta, OfferFinePrint, OfferHero, OfferSteps } from "@/components/offers/OfferParts";
+import { ComboBar, OfferCta, OfferFinePrint, OfferHero, OfferSteps } from "@/components/offers/OfferParts";
 import { bookingUrl } from "@/lib/links";
 import { trackEvent } from "@/lib/metaPixel";
 import { getCoatingServices } from "@/lib/api";
@@ -46,6 +46,7 @@ const CeramicCoatingOffer = () => {
         />
       </Helmet>
 
+      <ComboBar />
       <OfferHero
         eyebrow="Ceramic coating offer"
         title="10% off your ceramic coating. The inspection is free."

@@ -13,6 +13,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
 import { CONTACT } from "@/lib/links";
+import { COATING_COMBO_PATH, isCoatingComboLive } from "@/lib/promos";
 
 export const OfferHeader = () => (
   <header className="absolute top-0 inset-x-0 z-20">
@@ -28,6 +29,28 @@ export const OfferHeader = () => (
     </div>
   </header>
 );
+
+/**
+ * Red bar above the hero on the other offer pages, pointing at the Coating
+ * Combo. Instagram's "Continue exploring" card on the Combo retargeting ad
+ * reopens the last page a visitor saw on the site (often these pages), so this
+ * keeps them one tap from the Combo. Hides itself after the offer ends.
+ */
+export const ComboBar = () => {
+  if (!isCoatingComboLive()) return null;
+  return (
+    <Link
+      to={COATING_COMBO_PATH}
+      className="relative z-30 flex items-center justify-center gap-2 bg-rogue-red hover:bg-rogue-red/90 px-4 py-2.5 text-center text-sm text-white transition-colors"
+    >
+      <span className="leading-snug">
+        <strong className="font-montserrat font-semibold">Coating Combo J$49,999</strong> · detail + 1-year ceramic ·
+        till Nov 30
+      </span>
+      <ArrowRight className="h-4 w-4 flex-shrink-0" />
+    </Link>
+  );
+};
 
 interface OfferHeroProps {
   eyebrow: string;

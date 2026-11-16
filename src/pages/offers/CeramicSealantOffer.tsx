@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import { Droplets, ShieldCheck, Sparkles } from "lucide-react";
 import Footer from "@/components/Footer";
-import { OfferCta, OfferFinePrint, OfferHero, OfferSteps } from "@/components/offers/OfferParts";
+import { ComboBar, OfferCta, OfferFinePrint, OfferHero, OfferSteps } from "@/components/offers/OfferParts";
 import { bookingUrl } from "@/lib/links";
 import { trackEvent } from "@/lib/metaPixel";
 import { getWashPrices } from "@/lib/api";
@@ -46,6 +46,7 @@ const CeramicSealantOffer = () => {
         />
       </Helmet>
 
+      <ComboBar />
       <OfferHero
         eyebrow="Ceramic Sealant offer"
         title="Your wash is half price when you add Ceramic Sealant"
