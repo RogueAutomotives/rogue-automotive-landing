@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowRight, CheckCircle2, FileText, Loader2, Lock, Trash2, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, CreditCard, FileText, Loader2, Lock, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PartsShell, useCatalog, usePartsState, PartImage, QtyStepper, Loading, ErrorNote } from "@/components/parts/PartsShell";
 import ContainerBanner from "@/components/parts/ContainerBanner";
@@ -86,7 +86,7 @@ export default function PartsOrder() {
     setMessage(null);
     try {
       const s = await savePledge(session.accessKey, known.map((l) => ({ slug: l.slug, qty: l.qty })));
-      done(s, hasPledge ? "Pledge updated — your invoice has been re-issued." : `Pledge recorded — you're in ${container?.name}.`);
+      done(s, hasPledge ? "Pledge updated — your invoice has been re-issued." : `Pledge recorded — you're in ${container?.name}. Pay by card to lock in your place.`);
     } catch (err) {
       setMessage({ kind: "error", text: err instanceof Error ? err.message : "Could not save your pledge." });
     } finally {
@@ -215,6 +215,11 @@ export default function PartsOrder() {
                     </Button>
                   )}
 
+                  {invoiceHref && !locked && unchanged && (
+                    <Link to={`${invoiceHref}#pay`} className="mt-3 flex items-center justify-center gap-2 rounded-full bg-rogue-charcoal hover:bg-black text-white py-4 font-montserrat font-semibold">
+                      <CreditCard className="h-4 w-4" /> Pay now by card
+                    </Link>
+                  )}
                   {invoiceHref && (
                     <Link to={invoiceHref} className="mt-3 flex items-center justify-center gap-2 rounded-full border border-slate-300 py-3 font-montserrat font-semibold text-sm text-rogue-charcoal hover:border-rogue-red hover:text-rogue-red">
                       <FileText className="h-4 w-4" /> My invoice {session!.invoice!.number}
@@ -240,7 +245,7 @@ export default function PartsOrder() {
                   )}
                   {container?.acceptingPledges && (
                     <p className="text-xs text-rogue-slate mt-4">
-                      {container.name} closes {closesLabel(container)}. You can change your pledge until then, or until your parts invoice is paid.
+                      {container.name} closes {closesLabel(container)}. You can change your pledge until then, or until you pay for your parts.
                     </p>
                   )}
                   {session && (
