@@ -102,7 +102,8 @@ export default function PartsList() {
             <p className="flex items-start gap-2 text-xs text-rogue-slate mt-8 max-w-3xl">
               <Info className="h-4 w-4 shrink-0" />
               Freight is an estimate until the container is measured in Kingston. Indicative prices are firmed up when
-              the factory quotes; your invoice always shows the price on the day you pledge.
+              the factory quotes; your invoice always shows the price on the day you pledge. Prices and freight don't include customs duty
+              or GCT; those are paid by you.
             </p>
           </>
         )}

@@ -1,9 +1,9 @@
 /**
  * /parts/invoice/:number?k=token — one number, two printable documents:
  * RP-xxxx-P the parts invoice (payable now) and RP-xxxx-F the freight estimate
- * (settled when the container lands). Card payment shows only when switched on.
+ * (settled when the container lands). Payment is by card only (Stripe).
  */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -134,15 +134,11 @@ function PartsDocument({ inv, token, onPaid }: { inv: PartsInvoice; token: strin
       <div className="flex flex-wrap justify-between gap-6 mt-6">
         <div className="max-w-sm text-sm">
           <h3 className="font-montserrat font-bold text-rogue-charcoal mb-2">How to pay</h3>
-          <dl className="space-y-1 text-rogue-slate">
-            <div className="font-semibold text-rogue-charcoal">{inv.payee.business}</div>
-            {inv.payee.accountName && <div>Account name: {inv.payee.accountName}</div>}
-            {inv.payee.bank && <div>Bank: {inv.payee.bank}</div>}
-            {inv.payee.account && <div>Account: {inv.payee.account}</div>}
-            {inv.payee.contact && <div>{inv.payee.contact}</div>}
-            <div>Reference: <span className="font-semibold text-rogue-charcoal">{inv.partsDocNumber} · {inv.plate}</span></div>
-          </dl>
-          {inv.payee.instructions && <p className="text-xs text-rogue-slate mt-3">{inv.payee.instructions}</p>}
+          <p className="text-rogue-slate">
+            Pay securely online by debit or credit card (Visa or Mastercard). Your invoice is marked paid straight away
+            and your place in {inv.containerName} is locked in.
+          </p>
+          <p className="text-xs text-rogue-slate mt-3">Questions? WhatsApp us on 876-324-0632 · Ref {inv.partsDocNumber}</p>
         </div>
         <dl className="text-sm min-w-[220px] space-y-1.5">
           <div className="flex justify-between gap-6"><dt className="text-rogue-slate">Parts ({t.units})</dt><dd className="tabular-nums">{fmtUsd(t.goods)}</dd></div>
@@ -155,7 +151,7 @@ function PartsDocument({ inv, token, onPaid }: { inv: PartsInvoice; token: strin
       </div>
       <div className="mt-6 space-y-4">
         <PaidStamp p={inv.parts} />
-        {!inv.parts.paid && inv.cardPaymentsEnabled && <CardPay inv={inv} token={token} document={1} amount={t.goodsJmd} onPaid={onPaid} />}
+        {!inv.parts.paid && t.goodsJmd > 0 && <CardPay inv={inv} token={token} document={1} amount={t.goodsJmd} onPaid={onPaid} autoStart={window.location.hash === "#pay"} />}
       </div>
       <p className="text-xs text-rogue-slate mt-6">
         Prices are as quoted on the day you pledged. Once this invoice is paid the figures are locked and your pledge can't be changed online.
@@ -175,6 +171,9 @@ function FreightDocument({ inv, token, onPaid }: { inv: PartsInvoice; token: str
           measured — nothing on this page is payable yet.
         </p>
       )}
+      <p className="mt-4 text-xs text-rogue-slate">
+        Parts and freight don't include customs duty or GCT. Those are paid by you.
+      </p>
       <div className="overflow-x-auto">
         <table className="w-full text-xs sm:text-sm mt-6">
           <thead>
@@ -215,10 +214,19 @@ function FreightDocument({ inv, token, onPaid }: { inv: PartsInvoice; token: str
   );
 }
 
-function CardPay({ inv, token, document, amount, onPaid }: { inv: PartsInvoice; token: string; document: 1 | 2; amount: number; onPaid: () => void }) {
+function CardPay({ inv, token, document, amount, onPaid, autoStart = false }: { inv: PartsInvoice; token: string; document: 1 | 2; amount: number; onPaid: () => void; autoStart?: boolean }) {
   const [intent, setIntent] = useState<{ clientSecret: string; amount: number } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const box = useRef<HTMLDivElement>(null);
+
+  // Arriving from "Pay now" on the order page: open the card form and bring it into view.
+  useEffect(() => {
+    if (!autoStart) return;
+    box.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoStart]);
 
   const start = async () => {
     setLoading(true);
@@ -235,7 +243,7 @@ function CardPay({ inv, token, document, amount, onPaid }: { inv: PartsInvoice; 
   };
 
   return (
-    <div className="print:hidden rounded-xl border border-slate-200 p-4">
+    <div ref={box} id={document === 1 ? "pay" : "pay-freight"} className="print:hidden rounded-xl border border-slate-200 p-4">
       {intent ? (
         <PartsStripeForm clientSecret={intent.clientSecret} amount={intent.amount} onPaid={onPaid} />
       ) : (

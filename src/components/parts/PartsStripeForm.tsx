@@ -85,7 +85,7 @@ function InnerForm({ amount, onPaid }: Omit<Props, "clientSecret">) {
 
 export default function PartsStripeForm({ clientSecret, amount, onPaid }: Props) {
   if (!stripePromise) {
-    return <p className="text-sm text-red-700">Card payment is unavailable right now — please pay by bank transfer.</p>;
+    return <p className="text-sm text-red-700">Card payment isn't loading right now. Please refresh, or WhatsApp us on 876-324-0632.</p>;
   }
   return (
     <Elements
