@@ -1,7 +1,7 @@
 /** /parts/sheet — the public demand sheet: what the container holds so far. No names or plates. */
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { PartsShell, usePartsState, Loading, ErrorNote, IndicativeBadge } from "@/components/parts/PartsShell";
+import { PartsShell, usePartsState, Loading, ErrorNote } from "@/components/parts/PartsShell";
 import { closesLabel, fmt, getPartsDemand } from "@/lib/partsApi";
 
 export default function PartsSheet() {
@@ -58,8 +58,7 @@ export default function PartsSheet() {
                   {data.rows.map((r) => (
                     <tr key={r.slug} className="border-b border-slate-100 last:border-0">
                       <td className="p-4">
-                        <span className="font-semibold text-rogue-charcoal">{r.name}</span>{" "}
-                        {!r.priceConfirmed && <IndicativeBadge />}
+                        <span className="font-semibold text-rogue-charcoal">{r.name}</span>
                       </td>
                       <td className="p-4 text-right tabular-nums">{r.owners}</td>
                       <td className="p-4 text-right tabular-nums font-semibold">{r.units}</td>

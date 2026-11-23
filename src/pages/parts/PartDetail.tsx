@@ -11,7 +11,6 @@ import {
   QtyStepper,
   Loading,
   ErrorNote,
-  IndicativeBadge,
 } from "@/components/parts/PartsShell";
 import { fmt, posterFor } from "@/lib/partsApi";
 
@@ -87,19 +86,10 @@ export default function PartDetail() {
             </div>
 
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-2">
-                {part.priceConfirmed ? (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                    <Check className="h-3 w-3" /> Price confirmed
-                  </span>
-                ) : (
-                  <IndicativeBadge />
-                )}
-              </div>
               <h1 className="font-montserrat font-bold text-3xl text-rogue-charcoal leading-tight">{part.name}</h1>
               {part.subtitle && <p className="text-rogue-slate mt-2 leading-relaxed">{part.subtitle}</p>}
 
-              <dl className="grid grid-cols-3 rounded-xl border border-slate-200 bg-white mt-6 divide-x divide-slate-200">
+              <dl className="grid grid-cols-2 rounded-xl border border-slate-200 bg-white mt-6 divide-x divide-slate-200">
                 <div className="p-4">
                   <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Part price</dt>
                   <dd className="font-montserrat font-bold text-xl text-rogue-charcoal tabular-nums mt-1">{money(part.price, part.price < 50 ? 2 : 0)}</dd>
@@ -108,14 +98,10 @@ export default function PartDetail() {
                   <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Freight</dt>
                   <dd className="font-montserrat font-bold text-xl text-rogue-red tabular-nums mt-1">{money(part.freightEach, 2)}</dd>
                 </div>
-                <div className="p-4">
-                  <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Landed each</dt>
-                  <dd className="font-montserrat font-bold text-xl text-rogue-charcoal tabular-nums mt-1">{money(part.landedEach, 2)}</dd>
-                </div>
               </dl>
               {data?.container && (
                 <p className="text-xs text-rogue-slate mt-2 tabular-nums">
-                  {part.cbm.toFixed(3)} m³ × {money(data.container.freightRatePerCbm)} per m³ = {money(part.freightEach, 2)} freight
+                  {part.cbm.toFixed(3)} m³ × {money(data.container.freightRatePerCbm)} per m³ = {money(part.freightEach, 2)} freight, billed separately when the container lands
                 </p>
               )}
 

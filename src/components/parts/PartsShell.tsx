@@ -188,10 +188,3 @@ export function ErrorNote({ children }: { children: ReactNode }) {
   );
 }
 
-export function IndicativeBadge() {
-  return (
-    <span className="inline-flex items-center text-[11px] font-montserrat font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
-      Indicative price
-    </span>
-  );
-}
