@@ -153,11 +153,11 @@ export default function PartsOrder() {
                       <div className="flex-1 min-w-[160px]">
                         <Link to={`/parts/${slug}`} className="font-montserrat font-semibold text-rogue-charcoal hover:text-rogue-red">{part!.name}</Link>
                         <p className="text-xs text-rogue-slate tabular-nums mt-0.5">
-                          {money(part!.price, 2)} + {money(part!.freightEach, 2)} freight · {(part!.cbm * qty).toFixed(3)} m³
+                          {money(part!.price, 2)} each · {(part!.cbm * qty).toFixed(3)} m³
                         </p>
                       </div>
                       <QtyStepper value={qty} onChange={(n) => !locked && setQty(slug, n)} label={part!.name} />
-                      <span className="w-24 text-right font-montserrat font-bold text-rogue-charcoal tabular-nums">{money(part!.landedEach * qty, 2)}</span>
+                      <span className="w-24 text-right font-montserrat font-bold text-rogue-charcoal tabular-nums">{money(part!.price * qty, 2)}</span>
                       {!locked && (
                         <button type="button" onClick={() => setQty(slug, 0)} className="h-10 w-10 flex items-center justify-center text-rogue-slate hover:text-rogue-red" aria-label={`Remove ${part!.name}`}>
                           <X className="h-4 w-4" />
@@ -177,14 +177,14 @@ export default function PartsOrder() {
                   <dl className="space-y-2.5 text-sm">
                     <Row k={`Parts (${totals.units})`} v={money(totals.goods, 2)} />
                     <Row k="Packed volume" v={`${totals.cbm.toFixed(3)} m³`} />
-                    <Row k={`Freight${container?.freightIsEstimate !== false ? " (estimate)" : ""}`} v={money(totals.freight, 2)} />
                   </dl>
                   <div className="flex items-baseline justify-between border-t border-slate-200 mt-4 pt-4">
-                    <span className="text-xs uppercase tracking-wide text-rogue-slate font-semibold">Total landed</span>
-                    <span className="font-montserrat font-bold text-2xl text-rogue-charcoal tabular-nums">{money(totals.goods + totals.freight, 2)}</span>
+                    <span className="text-xs uppercase tracking-wide text-rogue-slate font-semibold">Total to pay</span>
+                    <span className="font-montserrat font-bold text-2xl text-rogue-charcoal tabular-nums">{money(totals.goods, 2)}</span>
                   </div>
                   <p className="text-xs text-rogue-slate mt-2">
-                    You pay for the parts now; the freight is settled when the container lands and is measured.
+                    Parts only. Freight ({container?.freightIsEstimate !== false && "about "}{money(totals.freight, 2)}) is billed
+                    separately when the container lands and is measured.
                   </p>
 
                   {!session ? (

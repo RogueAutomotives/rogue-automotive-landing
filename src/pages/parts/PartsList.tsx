@@ -10,7 +10,6 @@ import {
   QtyStepper,
   Loading,
   ErrorNote,
-  IndicativeBadge,
 } from "@/components/parts/PartsShell";
 import ContainerBanner from "@/components/parts/ContainerBanner";
 import { fmt } from "@/lib/partsApi";
@@ -64,22 +63,17 @@ export default function PartsList() {
                         <Link to={`/parts/${p.slug}`} className="hover:text-rogue-red">
                           <h2 className="font-montserrat font-bold text-lg text-rogue-charcoal leading-snug">{p.name}</h2>
                         </Link>
-                        {!p.priceConfirmed && <IndicativeBadge />}
                       </div>
                       {p.subtitle && <p className="text-sm text-rogue-slate mt-1.5 line-clamp-2">{p.subtitle}</p>}
 
-                      <dl className="grid grid-cols-3 gap-2 mt-4 rounded-xl bg-rogue-light p-3 text-center">
+                      <dl className="grid grid-cols-2 gap-2 mt-4 rounded-xl bg-rogue-light p-3 text-center">
                         <div>
                           <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Part</dt>
                           <dd className="font-montserrat font-semibold text-rogue-charcoal tabular-nums">{money(p.price, p.price < 50 ? 2 : 0)}</dd>
                         </div>
                         <div>
-                          <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Freight</dt>
+                          <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Freight (billed on arrival)</dt>
                           <dd className="font-montserrat font-semibold text-rogue-red tabular-nums">{money(p.freightEach, 2)}</dd>
-                        </div>
-                        <div>
-                          <dt className="text-[11px] uppercase tracking-wide text-rogue-slate">Landed</dt>
-                          <dd className="font-montserrat font-bold text-rogue-charcoal tabular-nums">{money(p.landedEach, 2)}</dd>
                         </div>
                       </dl>
 
@@ -101,8 +95,8 @@ export default function PartsList() {
             )}
             <p className="flex items-start gap-2 text-xs text-rogue-slate mt-8 max-w-3xl">
               <Info className="h-4 w-4 shrink-0" />
-              Freight is an estimate until the container is measured in Kingston. Indicative prices are firmed up when
-              the factory quotes; your invoice always shows the price on the day you pledge. Prices and freight don't include customs duty
+              Freight is an estimate until the container is measured in Kingston. Your invoice always shows the price on
+              the day you pledge. Prices and freight don't include customs duty
               or GCT; those are paid by you.
             </p>
           </>
