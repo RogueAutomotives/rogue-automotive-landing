@@ -200,7 +200,7 @@ const SPECIALIST_SERVICES: SpecialistService[] = [
 ];
 
 // Ceramic protection ladder — mirrors the live booking catalog exactly.
-// Tier 1 books at a fixed price; the real coatings are quoted after inspection.
+// All three book online at a fixed price by vehicle size (coatings since 2026-11-24).
 interface CeramicTier {
   name: string;
   duration: string;
@@ -229,7 +229,7 @@ const CERAMIC_TIERS: CeramicTier[] = [
     name: "Ceramic Coating",
     duration: "9–12 months",
     price: "From J$45,000",
-    priceNote: "quoted after free inspection",
+    priceNote: "cars · SUVs more · book online, 30% deposit",
     blurb: "Serious protection for daily drivers — a true single-layer ceramic coating.",
     points: ["Clay-bar decontamination", "Machine prep + IPA wipe-down", "Single-layer ceramic coating", "UV resistance · ~4 hours"],
     featured: true,
@@ -240,7 +240,7 @@ const CERAMIC_TIERS: CeramicTier[] = [
     name: "Ceramic Coating Pro",
     duration: "2–3 years",
     price: "From J$85,000",
-    priceNote: "quoted after free inspection",
+    priceNote: "cars · SUVs more · book online, 30% deposit",
     blurb: "Our flagship: true 9H-rated, two-layer ceramic. Warrantied.",
     points: ["Clay-bar decontamination", "Paint-correction prep", "Two-layer 9H ceramic", "Warrantied · ~6 hours"],
     bookingContent: "ceramic-pro",
@@ -309,12 +309,16 @@ const CeramicTiers = () => (
                     : "bg-rogue-charcoal hover:bg-rogue-dark"
                 }`}
               >
-                {tier.priceNote.startsWith("fixed") ? "Book now" : "Request a quote"}
+                Book now
               </Button>
             </a>
           </div>
         ))}
       </div>
+      <p className="text-xs text-rogue-slate text-center max-w-2xl mx-auto mt-6">
+        Coating prices assume paint in normal condition. Heavy swirls or scratches that need paint correction are quoted
+        separately.
+      </p>
     </div>
   </section>
 );
