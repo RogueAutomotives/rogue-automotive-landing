@@ -43,7 +43,7 @@ const OUTSIDE = [
   "Wheels and tyres cleaned",
   "Clay-bar decontamination",
   "Machine prep and IPA wipe-down",
-  "Ceramic coating: 9–12 months of water-beading shine and UV resistance",
+  "Ceramic coating: 1 year of water-beading shine and UV resistance",
 ];
 
 const TITLE = "The Coating Combo: inside and out for J$49,999 | Rogue Automotive";

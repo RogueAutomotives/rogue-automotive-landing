@@ -16,13 +16,13 @@ import { getCoatingServices } from "@/lib/api";
 const OFFER = "ceramic-coating-offer";
 // Shown if the live catalog can't be reached.
 const FALLBACK = [
-  { name: "Ceramic Coating (9–12 Months)", basePrice: 45000 },
+  { name: "Ceramic Coating (1 Year)", basePrice: 45000 },
   { name: "Ceramic Coating Pro (2–3 Years)", basePrice: 85000 },
 ];
 
 const jmd = (n: number) => `J$${Math.round(n).toLocaleString()}`;
 
-const bookHref = (content: string, service = "ceramic-coating-9-12") =>
+const bookHref = (content: string, service = "ceramic-coating-1") =>
   bookingUrl("/book-a-detail", { campaign: OFFER, content, service });
 const onBook = () => trackEvent("Lead", { content_name: OFFER });
 
@@ -48,7 +48,7 @@ const CeramicCoatingOffer = () => {
       <OfferHero
         eyebrow="Ceramic coating"
         title="A real ceramic coating. Book it online."
-        subtitle="Protection for 9 months to 3 years. Fixed prices by vehicle size. Pick your day and pay a 30% deposit to hold it."
+        subtitle="Protection for 1 to 3 years. Fixed prices by vehicle size. Pick your day and pay a 30% deposit to hold it."
         video="/offer-media/coating-hero.mp4"
         poster="/offer-media/coating-hero.jpg"
         cta={{ label: "Book my coating", href: bookHref("hero"), onClick: onBook }}
@@ -72,7 +72,7 @@ const CeramicCoatingOffer = () => {
             {coatings.map((c, i) => (
               <a
                 key={c.name}
-                href={bookHref("card", i === 0 ? "ceramic-coating-9-12" : "ceramic-coating-pro")}
+                href={bookHref("card", i === 0 ? "ceramic-coating-1" : "ceramic-coating-pro")}
                 onClick={onBook}
                 target="_blank"
                 rel="noopener noreferrer"

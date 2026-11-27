@@ -227,14 +227,14 @@ const CERAMIC_TIERS: CeramicTier[] = [
   },
   {
     name: "Ceramic Coating",
-    duration: "9–12 months",
+    duration: "1 year",
     price: "From J$45,000",
     priceNote: "cars · SUVs more · book online, 30% deposit",
     blurb: "Serious protection for daily drivers — a true single-layer ceramic coating.",
     points: ["Clay-bar decontamination", "Machine prep + IPA wipe-down", "Single-layer ceramic coating", "UV resistance · ~4 hours"],
     featured: true,
     bookingContent: "ceramic-12-month",
-    serviceSlug: "ceramic-coating-9-12",
+    serviceSlug: "ceramic-coating-1",
   },
   {
     name: "Ceramic Coating Pro",
